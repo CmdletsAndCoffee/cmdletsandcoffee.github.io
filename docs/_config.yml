@@ -3,7 +3,7 @@ plugins:
   - jekyll-include-cache
 remote_theme: "mmistakes/minimal-mistakes@4.27.3"
 title: "Cmdlets and Coffee"
-description: "Your daily brew for professional automation.""
+description: "Your daily brew for professional automation."
 author:
   name: "Tommy Becker"
   email: "mockmyberet@me.com"
