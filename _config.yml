@@ -1,0 +1,9 @@
+plugins:
+  - jekyll-remote-theme
+  - jekyll-include-cache
+remote_theme: mmistakes/minimal-mistakes
+title: "My Jekyll Site"
+description: "A simple Jekyll site using Minimal Mistakes theme"
+author:
+  name: "Your Name"
+  email: "your_email@example.com"
