@@ -36,9 +36,6 @@ search: true
 markdown: kramdown
 remote_theme: cmdletsandcoffee/minimal-mistakes
 # Outputting
-permalink: /:categories/:title/
-paginate: nil # amount of posts to show
-paginate_path: nil
 timezone: America/Chicago
 
 include:
@@ -72,18 +69,23 @@ author:
   location : "The Cloud"
   email  : "thebrewmaster@cmdletsandcoffee.github.io"
 
+# Produces a cleaner folder structure when using categories
+permalink: /:year/:month/:title.html
+
+# Explicitly turn off the old code
+paginate: nil
+paginate_path: nil
+
+# Pagination Settings
 pagination:
   enabled: true
-  collection: 'posts'
-  per_page: 5
-  permalink: '/page/:num/'  # Pages are index.html inside this folder (default)
-  title: ':title - page :num'
+  per_page: 3
+  offset: 2
+  permalink: '/page/:num/'
+  title: ':title - page :num of :max'
   limit: 0
   sort_field: 'date'
   sort_reverse: true
-  trail:
-    before: 2
-    after: 2
 
 footer:
   links:
