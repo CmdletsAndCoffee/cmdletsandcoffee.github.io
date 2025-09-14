@@ -73,8 +73,6 @@ author:
 permalink: /:year/:month/:title.html
 
 # Explicitly turn off the old code
-paginate: nil
-paginate_path: nil
 
 pagination:
   # Set enabled to true to use paginate v2
