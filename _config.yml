@@ -14,17 +14,20 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Cmdlets and Coffee
-tagline: "Your daily brew for professional automation."
-baseurl: "" # the subpath of your site, e.g. /blog/
+subtitle: "Your daily brew for professional automation."
+logo: /assets/images/web-app-manifest-512x512.png # path of logo image to display in the masthead, e.g. /assets/images/88x88.png
 url: "https://cmdletsandcoffee.github.io" # the base hostname & protocol for
 email: mockmyberet@me.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Your daily brew for professional automation. Welcome to Cmdlets and Coffee, the podcast for IT professionals who want to master PowerShell. We’ll demystify complex topics and provide clear, practical guides to help you write scalable, secure, and resilient code.
+
+  Each week, we’ll guide you from the fundamentals of cmdlets and pipelines to professional practices like Git, testing with Pester, and securing your scripts. We'll then dive deep into advanced concepts, including building your own modules, using classes, and automating the cloud with Microsoft Graph and Azure Key Vault.
+
+  We don’t just teach you commands; we teach you a professional mindset. Subscribe now and join us on the journey to becoming a PowerShell Pro.
+baseurl: "" # the subpath of your site, e.g. /blog/
 twitter_username: mockmyberet
 github_username: mockmyberet
-minimal_mistakes_skin: default
+minimal_mistakes_skin: dark
 search: true
 
 # Build settings
