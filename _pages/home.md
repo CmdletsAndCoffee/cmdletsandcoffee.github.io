@@ -2,14 +2,11 @@
 title: "Welcome to Cmdlets and Coffee"
 layout: splash
 permalink: /
-date: 2025-09-13
+hidden: true
 header:
   overlay_color: "#000"
   overlay_filter: "0.5"
   overlay_image: /assets/images/unsplash.jpg
-  #actions:
-  #  - label: "Download"
-  #    url: "https://github.com/mmistakes/minimal-mistakes/"
   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 excerpt: "Solving your scripting challenges, one cup at a time."
 intro:
