@@ -1,19 +1,23 @@
 ---
-title: "Splash Page"
+title: "Welcome to Cmdlets and Coffee"
 layout: splash
-permalink: /splash-page/
+permalink: /
 date: 2025-09-13
 header:
   overlay_color: "#000"
   overlay_filter: "0.5"
   overlay_image: /assets/images/unsplash.jpg
-  actions:
-    - label: "Download"
-      url: "https://github.com/mmistakes/minimal-mistakes/"
+  #actions:
+  #  - label: "Download"
+  #    url: "https://github.com/mmistakes/minimal-mistakes/"
   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
-excerpt: "Bacon ipsum dolor sit amet salami ham hock ham, hamburger corned beef short ribs kielbasa biltong t-bone drumstick tri-tip tail sirloin pork chop."
+excerpt: "Solving your scripting challenges, one cup at a time."
 intro:
-  - excerpt: 'Nullam suscipit et nam, tellus velit pellentesque at malesuada, enim eaque. Quis nulla, netus tempor in diam gravida tincidunt, *proin faucibus* voluptate felis id sollicitudin. Centered with `type="center"`'
+  - excerpt: 'Like many of you, I’ve spent my career in the trenches of IT, where repetitive tasks and a lack of scalable solutions can quickly drain your energy. I discovered the power of PowerShell out of necessity but quickly learned that it was more than just a tool—it was a path to creating smarter, more resilient automation.
+
+I started this podcast because I believe every IT professional can become an expert. My goal is to demystify the complex world of PowerShell, providing you with a clear roadmap from basic scripting to professional development, one cup of coffee at a time.
+
+I'm excited to have you join the conversation and look forward to building a community of pros who are ready to level up their skills.'
 ---
 
 {% include feature_row id="intro" type="center" %}
