@@ -1,5 +1,4 @@
 ---
-title: "Welcome to Cmdlets and Coffee"
 layout: splash
 permalink: /
 hidden: true
@@ -7,18 +6,33 @@ header:
   overlay_color: "#5e616c"
   overlay_image: /assets/images/unsplash.jpg
   actions:
-    - label: "Blog"
-      url: "https://github.com/mmistakes/minimal-mistakes/"
-  caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
+    - label: "<i class='fas fa-download'></i> Install now"
+      url: "/docs/quick-start-guide/"
 excerpt: >
-    Solving your scripting challenges, one cup at a time.
-intro:
-    - excerpt: >
-    'Like many of you, I’ve spent my career in the trenches of IT, where repetitive tasks and a lack of scalable solutions can quickly drain your energy. I discovered the power of PowerShell out of necessity but quickly learned that it was more than just a tool—it was a path to creating smarter, more resilient automation.
-
-    I started this podcast because I believe every IT professional can become an expert. My goal is to demystify the complex world of PowerShell, providing you with a clear roadmap from basic scripting to professional development, one cup of coffee at a time.
-
-    I'm excited to have you join the conversation and look forward to building a community of pros who are ready to level up their skills.'
+  A flexible two-column Jekyll theme. Perfect for building personal sites, blogs, and portfolios.<br />
+  <small><a href="https://github.com/mmistakes/minimal-mistakes/releases/tag/4.27.3">Latest release v4.27.3</a></small>
+feature_row:
+  - image_path: /assets/images/mm-customizable-feature.png
+    alt: "customizable"
+    title: "Super customizable"
+    excerpt: "Everything from the menus, sidebars, comments, and more can be configured or set with YAML Front Matter."
+    url: "/docs/configuration/"
+    btn_class: "btn--primary"
+    btn_label: "Learn more"
+  - image_path: /assets/images/mm-responsive-feature.png
+    alt: "fully responsive"
+    title: "Responsive layouts"
+    excerpt: "Built with HTML5 + CSS3. All layouts are fully responsive with helpers to augment your content."
+    url: "/docs/layouts/"
+    btn_class: "btn--primary"
+    btn_label: "Learn more"
+  - image_path: /assets/images/mm-free-feature.png
+    alt: "100% free"
+    title: "100% free"
+    excerpt: "Free to use however you want under the MIT License. Clone it, fork it, customize it... whatever!"
+    url: "/docs/license/"
+    btn_class: "btn--primary"
+    btn_label: "Learn more"
 ---
 
-{% include feature_row id="intro" type="center" %}
+{% include feature_row %}
