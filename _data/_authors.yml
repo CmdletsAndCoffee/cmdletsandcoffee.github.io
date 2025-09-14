@@ -1,0 +1,17 @@
+Tommy Becker:
+  avatar: /assets/images/tbecker.jpg
+  name: Tommy Becker
+  bio: I'm the host of Cmdlets and Coffee, helping IT pros master PowerShell and level up their careers, one script at a time.
+  links:
+    - label: Website
+      icon: fas fa-fw fa-link
+      url: https://cmdletsandcoffee.github.io
+    - label: Twitter
+      icon: fab fa-fw fa-twitter-square
+      url: https://twitter.com/mockmyberet
+    - label: GitHub
+      icon: fab fa-fw fa-github
+      url: https://github.com/mockmyberet
+    - label: Instagram
+      icon: fab fa-fw fa-instagram
+      url: https://instagram.com/mockmyberet

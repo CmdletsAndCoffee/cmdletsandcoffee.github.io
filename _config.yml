@@ -67,22 +67,13 @@ plugins:
   - jekyll-include-cache
 
 author:
-  name   : "Tommy Becker"
-  avatar : "/assets/images/bio-photo.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  name   : "The Brewmaster"
+  avatar : "/assets/images/logo/png"
+  bio    : "I'm here to transform scripters into professionals by demystifying complex PowerShell topics and teaching the mindset and practices required for modern, enterprise-level automation."
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://cmdletsandcoffee.github.io"
 
 footer:
   links:
