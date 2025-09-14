@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "jekyll", group: :jekyll_plugins
 gem "jekyll-include-cache", group: :jekyll_plugins
-gem "minimal-mistakes-jekyll", path: ".."
+gem "minimal-mistakes-jekyll"
 gem "rake"
 
 gem "tzinfo-data"
