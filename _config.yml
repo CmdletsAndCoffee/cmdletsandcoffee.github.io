@@ -55,7 +55,7 @@ include:
 
 # Plugins (previously gems:)
 plugins:
-  - jekyll-paginate
+  - jekyll-paginate-v2
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
@@ -73,8 +73,26 @@ author:
 permalink: /:year/:month/:title.html
 
 # Explicitly turn off the old code
-paginate: 5
-paginate_path: /posts/page/:num
+paginate: nil
+paginate_path: nil
+
+pagination:
+  # Set enabled to true to use paginate v2
+  # enabled: true
+  debug: false
+  collection: 'posts'
+  per_page: 10
+  permalink: '/page/:num/'
+  title: ':title - page :num'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
+  category: 'posts'
+  tag: ''
+  locale: ''
+  trail:
+    before: 2
+    after: 2
 
 footer:
   links:
