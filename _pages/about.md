@@ -2,7 +2,7 @@
 permalink: /about/
 title: "About Cmdlets and Coffee"
 ---
-# Welcome to Cmdlets and Coffee: Your New Brew for PowerShell Mastery
+## Your New Brew for PowerShell Mastery
 
 Howdy, fellow IT Pros and system administrators!
 
