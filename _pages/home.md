@@ -1,6 +1,6 @@
 ---
-title: "Welcome to Cmdlets and Coffee"
 layout: splash
+hidden: true
 permalink: /
 header:
   overlay_color: "#000"
@@ -16,4 +16,4 @@ I started this podcast because I believe every IT professional can become an exp
 I'm excited to have you join the conversation and look forward to building a community of pros who are ready to level up their skills.'
 ---
 
-{% include feature_row id="intro" type="center" %}
+{% include intro %}
