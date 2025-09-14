@@ -68,12 +68,10 @@ plugins:
 
 author:
   name   : "The Brewmaster"
-  avatar : "/assets/images/logo/png"
+  avatar : "/assets/images/logo.png"
   bio    : "I'm here to transform scripters into professionals by demystifying complex PowerShell topics and teaching the mindset and practices required for modern, enterprise-level automation."
-  links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://cmdletsandcoffee.github.io"
+  location : "The Cloud"
+  email  : "thebrewmaster@cmdletsandcoffee.github.io"
 
 footer:
   links:
