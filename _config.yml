@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: Cmdlets and Coffee
 subtitle: "Your daily brew for professional automation."
-logo: /assets/images/web-app-manifest-512x512.png # path of logo image to display in the masthead, e.g. /assets/images/88x88.png
+logo: /assets/images/logo.png # path of logo image to display in the masthead, e.g. /assets/images/88x88.png
 url: "https://cmdletsandcoffee.github.io" # the base hostname & protocol for
 email: mockmyberet@me.com
 description: >- # this means to ignore newlines until "baseurl:"
