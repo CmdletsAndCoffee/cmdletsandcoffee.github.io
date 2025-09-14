@@ -16,7 +16,6 @@
 title: Cmdlets and Coffee
 subtitle: "Your daily brew for professional automation."
 logo: /assets/images/logo.png # path of logo image to display in the masthead, e.g. /assets/images/88x88.png
-url: "https://cmdletsandcoffee.github.io" 
 email: mockmyberet@me.com
 description: >- # this means to ignore newlines until "baseurl:"
   Your daily brew for professional automation. Welcome to Cmdlets and Coffee, the podcast for IT professionals who want to master PowerShell. We’ll demystify complex topics and provide clear, practical guides to help you write scalable, secure, and resilient code.
