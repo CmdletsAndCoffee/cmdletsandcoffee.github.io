@@ -27,7 +27,10 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog/
 twitter_username: mockmyberet
 github_username: mockmyberet
-minimal_mistakes_skin: dark
+minimal_mistakes_skin: dark # options: "default", "dark", "air", "dinky", "navy", "pale-moon", "redmond", "yellow-swan"
+# For more information on all the options you can set, see
+# https://mmistakes.github.io/minimal-mistakes/docs/configuration
+
 search: true
 
 # Build settings
