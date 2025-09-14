@@ -2,8 +2,6 @@
 layout: splash
 permalink: /
 hidden: true
-pagination:
-  enabled: true
 header:
   overlay_color: "#5e616c"
   overlay_image: /assets/images/unsplash.jpg
