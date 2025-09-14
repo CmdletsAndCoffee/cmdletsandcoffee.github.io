@@ -34,7 +34,7 @@ search: true
 
 # Build settings
 markdown: kramdown
-remote_theme: cmdletsandcoffee/minimal-mistakes
+theme: minimal-mistakes-jekyll
 # Outputting
 timezone: America/Chicago
 
