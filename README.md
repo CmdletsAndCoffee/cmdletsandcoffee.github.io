@@ -1,43 +1,78 @@
-# Astro Starter Kit: Minimal
+# Cmdlets & Coffee ☕️
 
-```sh
-npm create astro@latest -- --template minimal
-```
+**Your daily brew for professional automation.**
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Welcome to the official source code for the **Cmdlets and Coffee** podcast and blog\! This repository is where we brew all of our website content and share the full recipe for every script and tutorial from the show.
 
-## 🚀 Project Structure
+-----
 
-Inside of your Astro project, you'll see the following folders and files:
+## What's Inside?
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+This site is built with **Astro**, a fantastic tool for building content-focused websites. Here you'll find all the ingredients you need:
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+* **Website Source:** The complete codebase for the `cmdletsandcoffee.gihhub.io` website.
+* **Blog Posts:** The source Markdown files for every article and show note.
+* **Code Examples:** All the scripts and code snippets discussed on the podcast, ready for you to explore and use.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+-----
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Get Started
 
-## 🧞 Commands
+Ready to grab a cup and start scripting?
 
-All commands are run from the root of the project, from a terminal:
+* **Listen to the Podcast:** Find the latest episodes and subscribe.
+* **Visit the Blog:** Read the show notes, transcripts, and bonus tutorials.
+* **Join the Community:** Ask questions and suggest topics in our official [Discussions repository](https://github.com/orgs/CmdletsAndCoffee/discussions).
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+-----
 
-## 👀 Want to learn more?
+## Brewing Locally
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Want to get the site running on your own machine? It's as easy as pouring yourself a fresh cup.
+
+### Prerequisites
+
+Make sure you have **Node.js** and a package manager like **pnpm** installed. If you prefer npm or yarn, you can use them instead.
+
+### Setup
+
+1. **Clone the repository:**
+
+    ```sh
+    git clone https://github.com/CmdletsAndCoffee/cmdletsandcoffee.github.io.git
+    cd cmdletsandcoffee.github.io
+    ```
+
+2. **Install dependencies:**
+
+    ```sh
+    pnpm install
+    ```
+
+### Development & Testing
+
+Once your dependencies are installed, you're ready to start brewing\!
+
+1. **Start the development server:**
+
+    ```sh
+    pnpm run dev
+    ```
+
+    This command starts a local server with live reloading, so your changes will appear instantly in your browser at `http://localhost:4321`.
+
+2. **Build for production:**
+
+    ```sh
+    pnpm run build
+    ```
+
+    This will compile all your Astro files into a set of static assets ready for deployment. The finished files will be located in the `dist/` directory.
+
+3. **Run a production preview:**
+
+    ```bash
+    pnpm run preview
+    ```
+
+    If you want to see exactly what the production site will look like before deploying, this command will run a local server for the built files.
