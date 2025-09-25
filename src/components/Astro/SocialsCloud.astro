@@ -32,8 +32,8 @@ import SocialIcon from "./utils/SocialIcon.astro";
 
 interface Social {
 	platform: string;
-	url: string;
-	userName?: string;
+	url?: string | undefined;
+	username: string;
 }
 
 interface Props {
@@ -61,8 +61,8 @@ const iconSize = getIconSize(socials.length);
 		socials.map((social) => (
 			<SocialIcon
 				platform={social.platform}
-				url={social.url}
-				userName={social.userName}
+				url={social.url || `https://${social.platform}.com/${social.username}`}
+				username={social.username || ""}
 				size={iconSize}
 				fill={fill}
 				class="-mr-2"

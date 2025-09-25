@@ -1,4 +1,5 @@
 import { Platforms } from "./Types/types";
+import { AUTHORS } from "./data/authors.ts";
 
 import type { Site, Author, Socials, NavEntry, Blog } from "./Types/types";
 
@@ -15,23 +16,33 @@ import type { Site, Author, Socials, NavEntry, Blog } from "./Types/types";
 export const socials: Socials[] = [
 	{
 		platform: "email",
-		url: "alkaline@jaredtruscott.com",
+		url: "mockmyberet@me.com",
+		username: "mockmyberet",
 	},
 	{
 		platform: "github",
-		url: "https://github.com/TruJared/",
+		url: "https://github.com/mockmyberet/",
+		username: "mockmyberet",
 	},
 	{
-		platform: "web",
-		url: "https://jaredmakes.com",
+		platform: "twitter",
+		url: "https://x.com/mockmyberet",
+		username: "mockmyberet",
 	},
 	{
 		platform: "bluesky",
-		url: "https://bsky.app/profile/trujared.bsky.social",
+		url: "https://bsky.app/profile/mockmyberet.bsky.social",
+		username: "mockmyberet.bsky.social",
+	},
+	{
+		platform: "web",
+		url: "https://chaoticthought.com",
+		username: "chaoticthought",
 	},
 	{
 		platform: "rss",
-		url: "/feed.xml",
+		url: "/feed.atom",
+		username: "chaoticthought",
 	}
 ];
 
@@ -39,29 +50,13 @@ export const socials: Socials[] = [
 export const allSocials: Socials[] = Platforms.map((platform) => ({
 	platform,
 	url: `https://${platform}.com`,
-	userName: `test_user_${platform}`,
+	username: `test_user_${platform}`,
 }));
 
-
-export const AUTHORS: Author[] = [
-	// assumes that the 1st author has the same socials as the site - change if needed
-	{
-		id: 1,
-		name: "Jared Truscott",
-		socials: socials,
-		email: 'jared@jaredmakes.com'
-	},
-	// example of a 2nd author with all socials - replace with your own author(s) or remove if not needed
-	{
-		id: 2,
-		name: "Jeff Goldblum",
-		socials: allSocials,
-		email: null
-	},
-]
+export const AUTHORS_LIST = AUTHORS;
 
 export const SITE: Site = {
-	title: "Alkaline",
+	title: "Cmdlets & Coffee",
 	showTitleBackground: true,
 	faviconSrc: "/favicon.png", // in public directory
 	url: "https://alkaline-theme.xyz",
@@ -75,7 +70,7 @@ export const SITE: Site = {
 	postsPerPage: 5,
 	shikiConfig: {
 		// ctrl+space for theme suggestions
-		theme: "night-owl",
+		theme: "one-dark-pro",
 	},
 	// I provide  Types for many of the top Google Fonts, edit or remove ./Types/google-fonts.d.ts to add/remove font types
 	fonts: [

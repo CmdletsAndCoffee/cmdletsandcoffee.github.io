@@ -31,7 +31,7 @@ import { Icon } from "astro-icon/components";
 interface Props {
 	platform: string;
 	url: string;
-	userName?: string;
+	username?: string;
 	size?: number;
 	fill?: boolean;
 	iconPrefix?: string; //  i.e. "ri"
@@ -41,7 +41,7 @@ interface Props {
 const {
 	platform,
 	url,
-	userName,
+	username,
 	size = 24,
 	fill = false,
 	iconPrefix = "ri",
@@ -77,7 +77,7 @@ const iconName = buildIconName(platform, fill, iconPrefix);
 	<Icon
 		name={iconName}
 		size={size}
-		title={userName || platform}
+		title={username || platform}
 		class:list={["mt-1 mr-2", className]}
 	/>
 </a>
