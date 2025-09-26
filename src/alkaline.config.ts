@@ -1,7 +1,7 @@
 import { Platforms } from "./Types/types";
 import { AUTHORS } from "./data/authors.ts";
 
-import type { Site, Author, Socials, NavEntry, Blog } from "./Types/types";
+import type { Site, Socials, NavEntry, Blog } from "./Types/types";
 
 /**
  * @description This file contains the configuration for the Alkaline theme.
