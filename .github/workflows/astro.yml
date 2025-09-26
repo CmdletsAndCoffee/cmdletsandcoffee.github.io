@@ -9,9 +9,14 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '*.md'
-      - '.*'
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'astro.config.mjs'
+      - 'tailwind.config.mjs'
+      - 'tsconfig.json'
+      - 'package.json'
+      - 'package-lock.json'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
