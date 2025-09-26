@@ -4,7 +4,8 @@ import Post from "@layouts/Post.astro";
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");
-	return posts.map((post) => ({
+	const filteredPosts = posts.filter(post => import.meta.env.DEV || !post.data.isDraft);
+	return filteredPosts.map((post) => ({
 		params: { slug: post.id },
 		props: {
 			postId: post.id,

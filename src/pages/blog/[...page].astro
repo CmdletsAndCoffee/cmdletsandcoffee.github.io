@@ -14,7 +14,8 @@ export async function getStaticPaths({
   paginate: PaginateFunction;
 }) {
   const posts = await getCollection("blog");
-  return paginate(posts, {
+  const filteredPosts = posts.filter(post => import.meta.env.DEV || !post.data.isDraft);
+  return paginate(filteredPosts, {
     pageSize: SITE.postsPerPage,
   });
 }
