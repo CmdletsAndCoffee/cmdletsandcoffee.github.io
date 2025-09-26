@@ -1,0 +1,433 @@
+---
+cover: {src: './images/og-image.png', alt: "PowerShell Code Design"}
+title: "PowerShell Code Design for Security and Automation"
+subtitle: "A deep dive into secure and modular coding practices for PowerShell."
+description: "A deep dive into secure and modular coding practices for PowerShell, focusing on a real-world example of sending password expiration notifications."
+pubDatetime: "2025-09-25"
+tags: ["powershell", "security", "automation", "design-patterns", "microsoft-graph"]
+authorId: 1
+isDraft: false
+---
+
+### Important Disclaimer:
+
+The PowerShell script and accompanying article are intended for demonstration and educational purposes only. This is an abstract designed to illustrate the principles of secure and modular coding practices. The provided script, `Send-PwdExpiryEmail.ps1`, is part of a larger, interdependent system that relies on additional files and a specific configuration to function correctly.
+
+This is **not** a standalone, ready-to-run solution. Before attempting to implement this design, you must understand the underlying concepts and dependencies, including:
+
+-   **Azure KeyVault**: Properly configured with the necessary secrets.
+-   **External Files**: The script requires a `Settings.json` file, an `Images.clixml` file, and an HTML email template.
+-   **Module Dependencies**: The required PowerShell modules (`Az.KeyVault`, `Microsoft.Graph.Users.Actions`, `MSAL.PS`) must be installed and configured.
+
+This guide is meant to serve as a high-level overview of a robust design pattern, highlighting the importance of security and maintainability in your coding projects. The focus is on what to consider and how to think through a secure implementation, rather than providing a plug-and-play solution.
+
+### The Ask
+
+The business wants to notify users when their passwords are going to expire via email. This is a common theme in businesses—a typical ask that can be handled without a third-party product and implemented very easily.
+
+### The Proposal
+
+Automate a process using PowerShell to send the emails.
+
+#### Initial Considerations & Design Questions
+
+-   **Authentication and Security**: How do we handle credentials securely?
+-   **Configuration Management**: How do we manage settings without hardcoding them?
+-   **Code Quality and Maintainability**: How do we write clean, reusable, and well-documented code?
+-   **Deployment and Lifecycle**: How do we deploy and update the script safely?
+
+### What Was Considered in This Design
+
+-   **Source Control & Security**: The design needs to separate sensitive information from the code, allowing the script itself to be checked into a version control system like Git without exposing credentials. The use of a JSON configuration file and Azure KeyVault ensures this separation.
+-   **Code Signing**: The original script is to be signed; this was a deliberate design choice for ensuring code integrity and authenticity.
+-   **Modularity and Reusability**: The script is written as a function, which makes it a reusable component. It loads its assets (images, styles, templates) from external files, which also enhances modularity and simplifies updates.
+-   **Dynamic Content**: The script uses string formatting and a `switch` statement to dynamically generate parts of the email, such as the number of days until expiration and the email's importance level, making the notifications more personalized and effective.
+-   **Inline Images**: This is an added detail; when sending through the MSGraph API, it was much easier to encode images as Base64 and embed them in the HTML body.
+
+### How to Securely Send Password Expiration Emails
+
+This guide breaks down the design of the `Send-PwdExpiryEmail.ps1` PowerShell script, a robust solution for notifying users about expiring passwords. The script prioritizes security and flexibility by separating configuration from code, using external files, and leveraging Azure KeyVault to protect sensitive information. This approach ensures the script can be securely signed and deployed without hardcoding credentials.
+
+While there are many ways to handle this type of automation, this specific method was chosen as the best approach for this environment, balancing high security with the ease of explanation and maintenance for the team responsible for its ongoing operation.
+
+Consider the following script. Make sure you understand the above disclaimer. This is a highly sanitized script with a few omissions and many missing helper scripts, components, and files. This is not intended to be run independently of a much larger package.
+
+```powershell
+#requires -Modules Az.KeyVault, Microsoft.Graph.Users.Actions, MSAL.PS
+
+function Send-PwdExpiryEmail {
+    <#
+    .SYNOPSIS
+        Send an email to users to notify them of expiring passwords.
+
+    .DESCRIPTION
+        This function uses the Microsoft Graph API to send email notifications to users
+        whose passwords are expiring soon. The settings are loaded from a separate JSON
+        file, ensuring that this script can be signed and used securely.
+
+    .NOTES
+        - Author: Tommy Becker
+        - Created: [Date]
+
+    .PARAMETER DisplayName
+        The display name of the Active Directory (AD) account for which the notification is intended.
+
+    .PARAMETER EmailAddress
+        The email address of the AD account to which the notification will be sent.
+
+    .PARAMETER ManagerEmail
+        The email address of the AD account's manager. This is an optional parameter and defaults to a specified service desk email. This logic has been removed from this example due to code sanitation.
+
+    .PARAMETER DaysToExpire
+        The number of days remaining until the password expires.
+
+    .LINK
+        For more information about this function and usage examples, visit:
+        [link to wiki explaining everything]
+
+    .EXAMPLE
+        Send-PwdExpiryEmail -DisplayName 'Joe Shmoe' -EmailAddress 'jshmoe@contoso.com' -ManagerEmail 'jsmith@contoso.com' -DaysToExpire 1
+        # Sends an email notification to Joe Shmoe at the email address jshmoe@contoso.com, with the password expiring in 1 day.
+
+    .EXAMPLE
+        Send-PwdExpiryEmail -DisplayName 'Jane Doe' -EmailAddress 'jdoe@contoso.com' -DaysToExpire 3
+        # Sends an email notification to Jane Doe at the email address jdoe@contoso.com, with the password expiring in 3 days.
+    #>
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
+        [string]$DisplayName,
+
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
+        [mailaddress]$EmailAddress,
+
+        [Parameter(ValueFromPipelineByPropertyName)]
+        [mailaddress]$ManagerEmail = 'servicedesk@contoso.com',
+
+        [Parameter(ValueFromPipelineByPropertyName)]
+        [int]$DaysToExpire = 0
+    )
+
+    begin {
+        # Load settings from the JSON configuration file
+        $Settings = Get-Content -Path .\Settings.json | ConvertFrom-Json -AsHashtable
+
+        # Load images from the XML file
+        $Images = Import-Clixml -Path .\Images.clixml
+
+        # Retrieve the client secret from Azure KeyVault and update the settings
+        $KeyVaultSecretParams = $Settings.KeyVaultSecret
+        $Settings.Remove('KeyVaultSecret')
+        $Settings.MgGraph.ClientSecret = Get-AzKeyVaultSecret @KeyVaultSecretParams | Select-Object -ExpandProperty SecretValue
+
+        # Get the Microsoft Graph access token using MSAL.PS and update the settings
+        $MsalTokenParams = $Settings.MgGraph
+        $Settings.Remove('MgGraph')
+        $Settings.MsalToken.AccessToken = Get-MsalToken @MsalTokenParams | Select-Object -ExpandProperty AccessToken
+
+        # Connect to Microsoft Graph using the obtained access token and update the settings
+        $MgGraphParams = $Settings.MsalToken
+        $null = Connect-MgGraph @MgGraphParams
+        $Settings.Remove('MsalToken')
+        $null = Remove-Variable -Name MsalTokenParams, KeyVaultSecretParams, MgGraphParams -Force
+    }
+
+    process {
+        # Prepare the email message parameters
+        $Settings.MessageSend.BodyParameter = Get-Content -Path $Settings.MailTemplate | ConvertFrom-Json -AsHashtable
+        $Settings.MessageSend.BodyParameter.Message.Body.Content = Get-Content -Path $Settings.MessageBodyTemplate
+        $MgUserMailParams = $Settings.MessageSend
+        $MgUserMailParams.BodyParameter.Message.ToRecipients.EmailAddress.Address = $EmailAddress
+
+        # Determine the text for days to expire and update email importance accordingly
+        $DaysToExpireText = switch ($DaysToExpire) {
+            1 { 'today' }
+            2 { 'tomorrow' }
+            { $_ -gt 2 } { ('in {0} days' -f $DaysToExpire) }
+            { $_ -lt 1 } { 'soon, or has already expired' }
+        }
+
+        # Set email importance based on the number of days to expire
+        if ($DaysToExpire -le 2) {
+            $MgUserMailParams.BodyParameter.Message.Importance = 'High'
+        } elseif ($DaysToExpire -ge 7) {
+            $MgUserMailParams.BodyParameter.Message.Importance = 'Low'
+        } else {
+            # Default importance for other cases (e.g., 3-6 days)
+            $MgUserMailParams.BodyParameter.Message.Importance = 'Normal'
+        }
+
+        # Load the HTML styles and update email subject and body
+        [string]$Styles = Get-Content .\Styles.html | Out-String
+        $MgUserMailParams.BodyParameter.Message.Remove('CcRecipients')
+        $MgUserMailParams.BodyParameter.Message.Subject = $MgUserMailParams.BodyParameter.Message.Subject.ToString().replace('soon', $DaysToExpireText)
+        $MgUserMailParams.BodyParameter.Message.Body.Content = $MgUserMailParams.BodyParameter.Message.Body.Content -f $Images.Banner, $Images.Bomgar, $Images.Signature, $DisplayName, $DaysToExpireText, $Styles.ToString()
+
+        # Send the email using Microsoft Graph API
+        Send-MgUserMail @MgUserMailParams
+    }
+
+    end {}
+}
+```
+
+### Step 1: The Core Script (.ps1)
+
+The main script is a PowerShell function, `Send-PwdExpiryEmail`, that contains the logic for sending email notifications. It uses `CmdletBinding` to define its parameters:
+
+-   **DisplayName**: The user's name.
+-   **EmailAddress**: The user's email.
+-   **ManagerEmail**: The manager's email (optional).
+-   **DaysToExpire**: The number of days until the password expires.
+
+This design keeps the script clean and reusable. The script itself doesn't contain any secrets; its job is to orchestrate the process and use the data it loads from external sources. Another process looks up the accounts from AD and uses this to send the emails.
+
+### Step 2: External Configuration (.json)
+
+Instead of hardcoding settings like tenant IDs, application IDs, and mail templates, the script loads them from a `Settings.json` file. This is a crucial design choice for several reasons:
+
+-   **Flexibility**: You can change settings without modifying the script. For example, if your application ID changes, you just update the JSON file.
+-   **Security**: Sensitive information is not embedded in the script, making it safer to share or store in a version control system.
+
+The script uses `Get-Content -Path .\Settings.json | ConvertFrom-Json -AsHashtable` to load these settings. The `AsHashtable` parameter converts the JSON object into a PowerShell hashtable, making it easy to access values like `$Settings.MgGraph.ClientId`.
+
+A typical `Settings.json` file might look something like this:
+
+```json
+{
+    "$schema": "./settings.schema.json",
+    "KeyVaultSecret": {
+        "Name": "SecretName",
+        "VaultName": "YourKeyVaultName"
+    },
+    "MailTemplate": "PasswordExpiryTemplate.json",
+    "MessageBodyTemplate": "PasswordExpiryBodyTemplate.1.html",
+    "MessageSend": {
+        "BodyParameter": null,
+        "UserId": "automation@contoso.com"
+    },
+    "MgGraph": {
+        "ClientId": "YourClientId",
+        "ClientSecret": null,
+        "TenantId": "YourTenantId"
+    },
+    "MsalToken": {
+        "AccessToken": null
+    },
+    "GetAdUser": {
+        "LdapFilter": "(&(objectCategory=person)(objectClass=user)(!(userAccountControl:1.2.840.113556.1.4.803:=2))(!(userAccountControl:1.2.840.113556.1.4.803:=65536))(pwdLastSet<={0}))",
+        "Properties": "Name, Enabled, PasswordNeverExpires, PasswordExpired, PasswordLastSet, EmailAddress, Manager, ExtensionAttribute2"
+    },
+    "AdQueryUserFromKeyVault": {
+        "Name": "ServiceAccountName",
+        "VaultName": "YourKeyVaultName"
+    },
+    "ConnectAzAccountParams": {
+        "ServicePrincipal": true,
+        "CertificateThumbprint": null,
+        "ApplicationId": "YourApplicationId",
+        "Tenant": "YourTenantId"
+    }
+}
+```
+
+Using the following schema:
+
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "KeyVaultSecret": {
+            "type": "object",
+            "properties": {
+                "Name": {
+                    "type": "string",
+                    "description": "The name of the secret inside the vault."
+                },
+                "VaultName": {
+                    "type": "string",
+                    "description": "The name of the Azure Key Vault."
+                }
+            },
+            "required": [
+                "Name",
+                "VaultName"
+            ]
+        },
+        "MailTemplate": {
+            "type": "string",
+            "description": "The file name of the email template."
+        },
+        "MessageBodyTemplate": {
+            "type": "string",
+            "description": "The file name of the email body template."
+        },
+        "MessageSend": {
+            "type": "object",
+            "properties": {
+                "BodyParameter": {
+                    "type": "null",
+                    "description": "This will be populated with email message data."
+                },
+                "UserId": {
+                    "type": "string",
+                    "description": "The user ID for sending the email."
+                }
+            },
+            "required": [
+                "UserId"
+            ]
+        },
+        "MgGraph": {
+            "type": "object",
+            "properties": {
+                "ClientId": {
+                    "type": "string",
+                    "description": "The Client ID for Microsoft Graph API access."
+                },
+                "ClientSecret": {
+                    "type": "null",
+                    "description": "The Client Secret (will be populated later)."
+                },
+                "TenantId": {
+                    "type": "string",
+                    "description": "The Azure AD Tenant ID."
+                }
+            },
+            "required": [
+                "ClientId",
+                "TenantId"
+            ]
+        },
+        "MsalToken": {
+            "type": "object",
+            "properties": {
+                "AccessToken": {
+                    "type": "null",
+                    "description": "The Access Token (will be populated later)."
+                }
+            },
+            "required": [
+                "AccessToken"
+            ]
+        },
+        "GetAdUser": {
+            "type": "object",
+            "properties": {
+                "LdapFilter": {
+                    "type": "string",
+                    "description": "The LDAP filter to query AD users with expiring passwords."
+                },
+                "Properties": {
+                    "type": "string",
+                    "description": "The properties to retrieve for each AD user."
+                }
+            },
+            "required": [
+                "LdapFilter",
+                "Properties"
+            ]
+        },
+        "AdQueryUserFromKeyVault": {
+            "type": "object",
+            "properties": {
+                "Name": {
+                    "type": "string",
+                    "description": "The name of the service account inside the vault."
+                },
+                "VaultName": {
+                    "type": "string",
+                    "description": "The name of the Azure Key Vault."
+                }
+            },
+            "required": [
+                "Name",
+                "VaultName"
+            ]
+        },
+        "ConnectAzAccountParams": {
+            "type": "object",
+            "properties": {
+                "ServicePrincipal": {
+                    "type": "boolean",
+                    "description": "Connect using a Service Principal."
+                },
+                "CertificateThumbprint": {
+                    "type": "null",
+                    "description": "The Certificate Thumbprint (will be populated later)."
+                },
+                "ApplicationId": {
+                    "type": "string",
+                    "description": "The Application ID for Azure authentication."
+                },
+                "Tenant": {
+                    "type": "string",
+                    "description": "The Azure AD Tenant ID."
+                }
+            },
+            "required": [
+                "ServicePrincipal",
+                "ApplicationId",
+                "Tenant"
+            ]
+        }
+    },
+    "required": [
+        "KeyVaultSecret",
+        "MailTemplate",
+        "MessageBodyTemplate",
+        "MessageSend",
+        "MgGraph",
+        "MsalToken",
+        "GetAdUser",
+        "AdQueryUserFromKeyVault",
+        "ConnectAzAccountParams"
+    ]
+}
+```
+
+### Step 3: Securely Storing Credentials (Azure KeyVault)
+
+The most critical part of this design is how it handles the Microsoft Graph client secret. Instead of putting this secret in the JSON file, the script retrieves it dynamically from Azure KeyVault. This is the gold standard for credential management.
+
+-   **JSON Reference**: The `Settings.json` file only contains a reference to the secret in Key Vault, not the secret itself. This reference is defined by the `KeyVaultSecret` property, which includes the `VaultName` and the `Name` of the secret.
+-   **PowerShell Retrieval**: The script uses the `Get-AzKeyVaultSecret` cmdlet to fetch the secret at runtime.
+-   **Authentication**: With the secret retrieved, the script uses the `MSAL.ps` module and the `Get-MsalToken` cmdlet to get an access token for Microsoft Graph. This token is then used by the `Connect-MgGraph` cmdlet to authenticate the session, allowing the script to send emails.
+
+This process ensures that the sensitive client secret is never exposed in a file or stored on the machine running the script.
+
+### Step 4: Separating Content from Code (.html, .clixml)
+
+The email content and styling are also kept in external files to maintain the script's flexibility and reusability. This allows us to sign the code and still make on-the-fly changes to the content of the message without affecting the running automation.
+
+-   **HTML Styles (`Styles.html`)**: The email's CSS is stored in a separate HTML file. The script reads this file and injects the styles into the final email body. This allows for easy design changes without touching the PowerShell code.
+-   **Message Body (`MessageBody.html`)**: The main body of the email is also an HTML file, which the script reads and populates with user-specific information, like the user's name and the number of days until expiration.
+-   **Images (`Images.clixml`)**: The script imports images, converted to Base64 strings, from a `Clixml` file. This format is a Microsoft-specific, serialized XML that can store complex objects, making it ideal for managing image data in a structured way.
+
+### Final thoughts:
+
+This approach to scripting is about more than just a single function—it's a mindset. By prioritizing modularity, security, and maintainability from the start, you can build automation solutions that are not only powerful but also resilient and trustworthy. The principles of externalizing configuration, using a secure vault for credentials, and separating content from code apply to any language or platform. Embracing this disciplined approach will allow you to create reliable and scalable systems that stand the test of time, reducing risk and improving the integrity of your entire IT ecosystem.
+
+### Coding Practices Used
+
+The script employs several best practices that enhance its functionality and maintainability:
+
+-   **Modularity**: The core logic is encapsulated within a single PowerShell function, `Send-PwdExpiryEmail`. This makes the code a reusable component that can be easily called from other scripts or automation systems.
+-   **Security**: Instead of embedding sensitive credentials directly in the script, it retrieves them at runtime from Azure KeyVault.
+-   **Configuration as Code**: All configurable settings are stored in a `Settings.json` file.
+-   **Robust Documentation**: The script includes comprehensive, built-in PowerShell help comments.
+
+### Scalability
+
+-   **Modular Design**: The function-based approach allows the script to be easily integrated into a larger system.
+-   **External Dependencies**: Reliance on scalable cloud services like Azure Key Vault and Microsoft Graph API.
+-   **Separation of Concerns**: Adaptable to different environments by changing external configuration files.
+
+### Modularity
+
+-   **Function-based structure**: A self-contained, portable unit of code.
+-   **Dependency on external files**: Easy to update settings or content without touching the core logic.
+-   **Clear Boundaries**: Clear inputs and outputs, with internal workings hidden from the caller.
+
+Thanks for your time. Happy coding!
