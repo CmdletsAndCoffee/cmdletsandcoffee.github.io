@@ -44,47 +44,49 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Detect package manager
-        id: detect-package-manager
-        run: |
-          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
-            echo "manager=yarn" >> $GITHUB_OUTPUT
-            echo "command=install" >> $GITHUB_OUTPUT
-            echo "runner=yarn" >> $GITHUB_OUTPUT
-            echo "lockfile=yarn.lock" >> $GITHUB_OUTPUT
-            exit 0
-          elif [ -f "${{ github.workspace }}/package.json" ]; then
-            echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=ci" >> $GITHUB_OUTPUT
-            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
-            echo "lockfile=package-lock.json" >> $GITHUB_OUTPUT
-            exit 0
-          else
-            echo "Unable to determine package manager"
-            exit 1
-          fi
+
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions:setup-node@v4
         with:
           node-version: "20"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
-          cache-dependency-path: ${{ env.BUILD_PATH }}/${{ steps.detect-package-manager.outputs.lockfile }}
+          # Cache will look for pnpm-lock.yaml by default with pnpm
+          cache: 'pnpm'
+
+      # NEW: Install pnpm using the official action
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8 # Specify a recent version of pnpm
+          run_install: false # We will run 'pnpm install' explicitly later
+
+      # REMOVED: The manual 'Detect package manager' step is now simplified,
+      # as we explicitly configure the rest of the steps to use pnpm.
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+
+      # REVISED: Install dependencies using 'pnpm install'
       - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        # The 'pnpm install' command will automatically use the pnpm-lock.yaml
+        run: pnpm install --frozen-lockfile
         working-directory: ${{ env.BUILD_PATH }}
+
+      # REVISED: Build with Astro using 'pnpm run build'
       - name: Build with Astro
         run: |
-          ${{ steps.detect-package-manager.outputs.runner }} astro build \
+          pnpm run build \
             --site "${{ steps.pages.outputs.origin }}" \
             --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          # Astro outputs to 'dist' by default
           path: ${{ env.BUILD_PATH }}/dist
+
+  # ... (The deploy job remains the same)
 
   deploy:
     environment:

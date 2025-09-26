@@ -10,6 +10,9 @@ This is a blog website built with the [Astro](https://astro.build/) framework. T
 
 When making changes, please adhere to the following coding style guidelines from the `CODING_STYLE.md` file:
 
+- **Package Manager:**
+  - Use `pnpm` for all package management tasks.
+
 - **General:**
   - Prioritize clarity and consistency with the existing codebase.
   - Functions, classes, and components should have a single responsibility.
@@ -43,9 +46,9 @@ When making changes, please adhere to the following coding style guidelines from
 
 Here are the most important commands for this project:
 
-- **`npm run dev`**: Starts the development server.
-- **`npm run build`**: Builds the website for production.
-- **`npm run check`**: Runs Astro's diagnostic checks.
+- **`pnpm run dev`**: Starts the development server.
+- **`pnpm run build`**: Builds the website for production.
+- **`pnpm run check`**: Runs Astro's diagnostic checks.
 
 ## File Structure
 
