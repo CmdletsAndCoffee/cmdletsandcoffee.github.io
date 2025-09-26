@@ -1,6 +1,6 @@
 // Do not touch this file: Builds themes from the theme.css file. It also builds the types (based on the theme names - check the bottom /src/Types/types.ts). It also creates a themeNames file.
 
-import css from 'css';
+import postcss from 'postcss';
 import { readFile, writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import chalk from 'chalk';
@@ -13,27 +13,32 @@ const outputNamesFile = path.resolve('./src/utils/themeNames.js');
 async function extractThemeNames() {
   try {
     const cssContent = await readFile(inputFile, 'utf-8');
-    const parsedCss = css.parse(cssContent);
+    const root = postcss.parse(cssContent);
+    const themeNames = new Set();
+    let rootThemeName = 'theme-light'; // Default root theme
 
-    let rootThemeName = 'theme-light';
-    const themeNames = parsedCss.stylesheet.rules
-      .filter(rule =>
-        rule.type === 'rule' &&
-        (rule.selectors[0].startsWith('.theme-') || rule.selectors.includes(':root'))
-      )
-      .map(rule => {
-        if (rule.selectors.includes(':root')) {
-          // Try to extract the theme name from the :root selector
-          const themeClass = rule.selectors.find(selector => selector.startsWith('.theme-'));
-          if (themeClass) {
-            rootThemeName = themeClass.slice(1); // Remove the leading dot
-          }
-          return rootThemeName;
+    root.walkRules(rule => {
+      if (rule.selectors.includes(':root')) {
+        // Attempt to find a theme class alongside :root, e.g., :root.theme-dark
+        const themeSelector = rule.selectors.find(s => s.startsWith('.theme-'));
+        if (themeSelector) {
+          rootThemeName = themeSelector.slice(1);
         }
-        return rule.selectors[0].slice(1); // Remove the leading dot
-      });
+        themeNames.add(rootThemeName);
+      } else {
+        rule.selectors.forEach(selector => {
+          if (selector.startsWith('.theme-')) {
+            // Extract from selectors like .theme-dark, [data-theme='theme-dark']
+            const match = selector.match(/^\.([\w-]+)/);
+            if (match) {
+              themeNames.add(match[1]);
+            }
+          }
+        });
+      }
+    });
 
-    return themeNames;
+    return Array.from(themeNames);
   } catch (error) {
     console.error(chalk.red(`Error reading or parsing CSS file: ${error.message}`));
     process.exit(1);
@@ -42,11 +47,11 @@ async function extractThemeNames() {
 
 async function generateFiles(themeNames) {
   const typeContent = `// This type is auto-generated. Do not edit manually.
-export type ThemeNames = ${themeNames.map(name => `'${name}'`).join(' | ')};
+export type ThemeNames = ${themeNames.map(name => `\'${name}\'`).join(' | ')};
 `;
 
   const namesContent = `// This file is auto-generated. Do not edit manually.
-export const themeNames = [${themeNames.map(name => `'${name}'`).join(', ')}];
+export const themeNames = [${themeNames.map(name => `\'${name}\'`).join(', ')}];
 `;
 
   try {
@@ -66,7 +71,7 @@ export const themeNames = [${themeNames.map(name => `'${name}'`).join(', ')}];
         console.log(chalk.yellow(`No changes needed in ${outputTypeFile}`));
       }
     } else {
-      await writeFile(outputTypeFile, existingTypes + '\n\n' + typeContent, 'utf-8');
+      await writeFile(outputTypeFile, existingTypes + '\\n\\n' + typeContent, 'utf-8');
       console.log(chalk.green(`Successfully updated ${outputTypeFile}`));
     }
 
