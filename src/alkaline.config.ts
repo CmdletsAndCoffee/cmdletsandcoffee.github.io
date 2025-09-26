@@ -31,8 +31,8 @@ export const socials: Socials[] = [
 	},
 	{
 		platform: "bluesky",
-		url: "https://bsky.app/profile/mockmyberet.bsky.social",
-		username: "mockmyberet.bsky.social",
+		url: "https://bsky.app/profile/tommybecker.bsky.social",
+		username: "tommybecker.bsky.social",
 	},
 	{
 		platform: "web",
@@ -40,7 +40,7 @@ export const socials: Socials[] = [
 		username: "chaoticthought",
 	},
 	{
-		platform: "rss",
+		platform: "atom",
 		url: "/feed.atom",
 		username: "chaoticthought",
 	}

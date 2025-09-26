@@ -18,8 +18,8 @@ export async function GET(context) {
 		.filter((post) => !post.data?.draft)
 		.sort(
 			(a, b) =>
-				new Date(b.data?.pubDatetime || 0).valueOf() -
-				new Date(a.data?.pubDatetime || 0).valueOf()
+				new Date(a.data?.pubDatetime || 0).valueOf() -
+				new Date(b.data?.pubDatetime || 0).valueOf()
 		)
 		.map((post) => ({
 			title: post.data?.title || "Untitled",

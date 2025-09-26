@@ -9,32 +9,34 @@ import type { Author } from "../Types/types";
 export const AUTHORS: Author[] = [
     {
         id: 1,
-        name: "Jane Doe",
-        email: "jane.doe@example.com",
+        name: "Tommy Becker",
+        email: "mockmyberet@me.com",
         socials: [
-            { platform: "github", username: "janedoe" },
-            { platform: "twitter-x", username: "janedoe" },
-            { platform: "linkedin", username: "janedoe" },
+            { platform: "github", username: "mockmyberet" },
+            { platform: "twitter-x", username: "mockmyberet" },
+            { platform: "linkedin", username: "mockmyberet" },
+            { platform: "bluesky", username: "tommybecker.bsky.social" },
         ],
     },
     {
         id: 2,
-        name: "John Smith",
-        email: null, // Email is optional
+        name: "Brian Martin",
+        email: "bhmartin@gmail.com", // Email is optional
         socials: [
-            { platform: "github", username: "johnsmith" },
-            { platform: "twitter-x", username: "johnsmith" },
-            { platform: "linkedin", username: "johnsmith" },
-            { platform: "mastodon", username: "johnsmith@mastodon.social" }, // Mastodon requires the full username
+            { platform: "github", username: "bmartin13" },
+            // { platform: "twitter-x", username: "johnsmith" },
+            // { platform: "linkedin", username: "johnsmith" },
+            // { platform: "mastodon", username: "johnsmith@mastodon.social" }, // Mastodon requires the full username
         ],
     },
     {
         id: 99,
-        name: "Alex Johnson",
+        name: "John Galt",
+        email: "jg@gulch.com",
         socials: [
-            { platform: "github", username: "alex-johnson" },
-            { platform: "web", username: "https://www.alexjohnson.com" },
-            { platform: "linkedin", username: "alex-johnson" },
+            { platform: "github", username: "whoisjohngalt" },
+            { platform: "web", username: "https://whoisjohngalt.com" },
+            { platform: "linkedin", username: "john-galt-philosopher" },
         ],
     },
 ];

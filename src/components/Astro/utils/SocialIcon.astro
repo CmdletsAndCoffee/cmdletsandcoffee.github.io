@@ -67,7 +67,14 @@ function buildIconName(platform: string, fill: boolean, iconPrefix: string) {
 	return `${iconPrefix}:${iconName()}-${iconModifier}`;
 }
 
-const iconName = buildIconName(platform, fill, iconPrefix);
+let iconName;
+switch (platform) {
+	case "atom":
+		iconName = "eos-icons:atom-electron";
+		break;
+	default:
+		iconName = buildIconName(platform, fill, iconPrefix);
+}
 ---
 
 <a
