@@ -59,7 +59,7 @@ export const SITE: Site = {
 	title: "Cmdlets & Coffee",
 	showTitleBackground: true,
 	faviconSrc: "/favicon.png", // in public directory
-	url: "https://alkaline-theme.xyz",
+	url: "https://cmdletsandcoffee.github.io",
 	ogImage: "/og-image.webp", // in public directory
 	author: AUTHORS[0].name, // Made with ❤️ by {your-name}
 	description: "A Neutral Base For Your Next Creation",
