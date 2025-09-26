@@ -2,6 +2,8 @@
 
 **Your daily brew for professional automation.**
 
+[![Deploy Astro site to Pages](https://github.com/CmdletsAndCoffee/cmdletsandcoffee.github.io/actions/workflows/astro.yml/badge.svg)](https://github.com/CmdletsAndCoffee/cmdletsandcoffee.github.io/actions/workflows/astro.yml)
+
 Welcome to the official source code for the **Cmdlets and Coffee** podcast and blog\! This repository is where we brew all of our website content and share the full recipe for every script and tutorial from the show.
 
 -----
