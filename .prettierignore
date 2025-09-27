@@ -1,0 +1,7 @@
+# Ignore lockfiles
+pnpm-lock.yaml
+
+# Ignore generated assets
+public/shiki/
+src/utils/themeNames.js
+src/Types/theme-names.ts
