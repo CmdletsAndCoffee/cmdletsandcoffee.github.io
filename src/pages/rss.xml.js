@@ -20,7 +20,7 @@ export async function GET(context) {
 				? new Date(post.data.pubDatetime)
 				: new Date(),
 			description: post.data?.description || "",
-			link: `${context.site}${post.collection}/${post.slug}/`,
+			link: `${context.site}${post.collection}/${post.id}/`,
 		}));
 
 	return rss({
