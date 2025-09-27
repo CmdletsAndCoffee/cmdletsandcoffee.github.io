@@ -16,7 +16,7 @@ on:
       - 'tailwind.config.mjs'
       - 'tsconfig.json'
       - 'package.json'
-      - 'package-lock.json'
+      - 'pnpm-lock.yaml'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -46,7 +46,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions:setup-node@v4
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
           # Cache will look for pnpm-lock.yaml by default with pnpm
