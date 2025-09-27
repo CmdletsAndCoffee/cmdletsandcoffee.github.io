@@ -1,4 +1,4 @@
----
+import type { CollectionEntry } from "astro:content";
 // Layout component that wraps around pages and blog posts, providing consistent structure and styling. you can read more about it here: https://docs.astro.build/en/guides/layouts/
 
 import { COLLECTION_NAMES_LIST } from "src/alkaline.config";
@@ -12,7 +12,7 @@ import Heading from "@components/Astro/Heading.astro";
 import Author from "@components/Astro/Author.astro";
 
 interface Props {
-  posts: any;
+  posts: CollectionEntry<"blog">[];
   page?: any;
   collectionName: (typeof COLLECTION_NAMES_LIST)[number] | string | undefined;
   title?: string | undefined;
@@ -36,7 +36,7 @@ const {
 const options = { "rounded-theme": true };
 
 posts?.sort(
-  (a: any, b: any) =>
+  (a, b) =>
     new Date(b.data?.pubDatetime || 0).valueOf() -
     new Date(a.data?.pubDatetime || 0).valueOf(),
 );
@@ -54,10 +54,10 @@ posts?.sort(
   <section class="md:max-w-3xl md:mx-auto mt-0">
     {!posts?.length && <p class="text-theme-primary">No posts found.</p>}
     {
-      posts?.map((post: any) => (
-        <article class="mb-10" id={post.id}>
+      posts?.map((post) => (
+        <article class="mb-10" id={post.slug}>
           <a
-            href={`/${post.collection || collectionName}/${post.id}`}
+            href={`/${post.collection || collectionName}/${post.slug}`}
             class="no-underline flex flex-row items-center mb-2 group"
           >
             {post.data.cover && (
@@ -86,7 +86,7 @@ posts?.sort(
           <p class="text-lg mb-2">
             {post.data.description}{" "}
             <a
-              href={`/${post.collection || collectionName}/${post.id}`}
+              href={`/${post.collection || collectionName}/${post.slug}`}
               class="text-theme-primary pl-2"
             >
               Read more...
