@@ -18,22 +18,24 @@
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/tailwind": "^6.0.2",
-    "@iconify-json/eos-icons": "^1.0.0",
+    "@iconify-json/eos-icons": "^1.2.4",
     "@iconify-json/ri": "^1.2.5",
-    "@tailwindcss/typography": "^0.5.16",
-    "astro": "^5.13.11",
+    "@tailwindcss/typography": "^0.5.19",
+    "astro": "^5.14.1",
     "astro-icon": "^1.1.5",
     "astro-robots-txt": "^1.0.0",
-    "chalk": "^5.4.1",
-    "globals": "^15.14.0",
+    "chalk": "^5.6.2",
+    "esbuild": "^0.25.10",
+    "globals": "^15.15.0",
     "postcss": "^8.5.6",
-    "shiki": "^3.12.2",
+    "sharp": "^0.34.4",
+    "shiki": "^3.13.0",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.9.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
-    "eslint": "^9.19.0",
-    "typescript-eslint": "^8.23.0"
+    "@eslint/js": "^9.36.0",
+    "eslint": "^9.36.0",
+    "typescript-eslint": "^8.44.1"
   }
 }
