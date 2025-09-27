@@ -1,11 +1,11 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import PageHeader from "@components/Astro/PageHeader.astro";
-import { getCollection } from "astro:content";
-import Card from "@components/Astro/Card.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import ClickableCard from "@components/Astro/ClickableCard.astro";
 
 // Fetch and sort the first 3 blog posts
-const posts = (await getCollection("blog"))
+const posts: CollectionEntry<'blog'>[] = (await getCollection("blog"))
   .sort((a, b) => b.data.pubDatetime.valueOf() - a.data.pubDatetime.valueOf())
   .slice(0, 3);
 ---
@@ -17,7 +17,7 @@ const posts = (await getCollection("blog"))
   />
 
   <section class="flex flex-col items-center justify-center mt-16 mb-16 fade-in">
-    <a href="/blog" class="bg-theme-primary text-theme-primary text-xl lg:text-2xl tracking-wide text-center shadow-sm shadow-theme-primary border-2 p-4 rounded-theme hover:bg-theme-secondary hover:text-theme-accent hover:shadow-none transition-all duration-300 ease-in-out">
+    <a href="/blog" class="bg-theme-primary no-underline text-theme-primary text-xl lg:text-2xl tracking-wide text-center shadow-sm shadow-theme-primary border-2 p-4 rounded-theme hover:bg-theme-secondary hover:text-theme-secondary hover:border-theme-secondary hover:shadow-none transition-all duration-300 ease-in-out">
       Explore Posts
     </a>
   </section>
@@ -28,12 +28,14 @@ const posts = (await getCollection("blog"))
     </h2>
     <div class="mx-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 mb-16 lg:p-5 build-in">
       {posts.map((post) => (
-        <Card
-          title={post.data.title}
-          description={post.data.description}
-          href={`/blog/${post.slug}/`}
-          shadowSize="lg"
-        />
+          <ClickableCard
+            iconName="ri:file-text-line"
+            alignIcon="left"
+            href={`/blog/${post.id}/`}
+            title={post.data.title}
+            description={post.data.description}
+            shadowSize="lg"
+          />
       ))}
     </div>
   </section>
