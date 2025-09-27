@@ -1,11 +1,11 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import PageHeader from "@components/Astro/PageHeader.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getPosts } from "@utils/getPosts";
 import ClickableCard from "@components/Astro/ClickableCard.astro";
 
 // Fetch and sort the first 3 blog posts
-const posts: CollectionEntry<'blog'>[] = (await getCollection("blog"))
+const posts = (await getPosts())
   .sort((a, b) => b.data.pubDatetime.valueOf() - a.data.pubDatetime.valueOf())
   .slice(0, 3);
 ---

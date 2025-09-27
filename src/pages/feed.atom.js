@@ -1,20 +1,12 @@
 // This file generates the Atom feed for your blog.
-import { getCollection } from "astro:content";
+import { getPosts } from "@utils/getPosts";
 import { SITE } from "@config";
 import { COLLECTION_NAMES_LIST } from "../alkaline.config";
 
 export async function GET(context) {
-	const allPosts = await Promise.all(
-		COLLECTION_NAMES_LIST.map(async (collection) => {
-			const posts = await getCollection(collection);
-			return posts.map((post) => ({ ...post, collection }));
-		}),
-	);
+	const allPosts = await getPosts(COLLECTION_NAMES_LIST);
 
-	const sortedPosts = allPosts
-		.flat()
-		.filter((post) => !post.data?.isDraft)
-		.sort(
+	const sortedPosts = allPosts.sort(
 			(a, b) =>
 				new Date(b.data?.pubDatetime).valueOf() -
 				new Date(a.data?.pubDatetime).valueOf(),
