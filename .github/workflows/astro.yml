@@ -45,19 +45,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          # Cache will look for pnpm-lock.yaml by default with pnpm
-          cache: 'pnpm'
-
       # NEW: Install pnpm using the official action
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 8 # Specify a recent version of pnpm
           run_install: false # We will run 'pnpm install' explicitly later
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          # Cache will look for pnpm-lock.yaml by default with pnpm
+          cache: 'pnpm'
 
       # REMOVED: The manual 'Detect package manager' step is now simplified,
       # as we explicitly configure the rest of the steps to use pnpm.
