@@ -1,0 +1,22 @@
+# .github/workflows/lint.yml
+name: Lint Code Base
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  editorconfig:
+    name: Check EditorConfig
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Run EditorConfig Checker
+        uses: editorconfig-checker/action-editorconfig-checker@v1
+        with:
+          # Exclude files that are not part of the source code
+          exclude: ".git|LICENSE"
