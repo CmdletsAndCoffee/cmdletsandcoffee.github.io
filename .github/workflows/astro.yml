@@ -47,9 +47,9 @@ jobs:
 
       # NEW: Install pnpm using the official action
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         with:
-          version: 8 # Specify a recent version of pnpm
+          version: 10
           run_install: false # We will run 'pnpm install' explicitly later
 
       - name: Setup Node
