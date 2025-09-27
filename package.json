@@ -3,14 +3,14 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "npm run build:themes && astro dev",
-    "start": "npm run build:themes && astro dev",
-    "build": "npm run astro check && astro build",
-    "check": "npm run build:themes && astro check",
-    "preview": "npm run build:themes && astro preview",
+    "dev": "pnpm run build:themes && astro dev",
+    "start": "pnpm run build:themes && astro dev",
+    "build": "pnpm run astro check && astro build",
+    "check": "pnpm run build:themes && astro check",
+    "preview": "pnpm run build:themes && astro preview",
     "astro": "astro",
     "build:themes": "node ./src/utils/buildThemes.mjs",
-    "nuke": "rm -rf .astro && rm -rf node_modules -v && npm i && npm run build:themes && astro dev"
+    "nuke": "rm -rf .astro && rm -rf node_modules -v && pnpm i && pnpm run build:themes && astro dev"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
