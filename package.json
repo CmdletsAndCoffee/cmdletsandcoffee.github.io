@@ -14,7 +14,10 @@
     "lint": "pnpm run lint:editorconfig && pnpm run lint:prettier && pnpm run lint:eslint && pnpm run check",
     "lint:editorconfig": "editorconfig-checker",
     "lint:prettier": "prettier --check .",
-    "lint:eslint": "eslint ."
+    "lint:eslint": "eslint .",
+    "format": "prettier --write .",
+    "lint:eslint:fix": "eslint . --fix",
+    "fix": "pnpm run format && pnpm run lint:eslint:fix"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

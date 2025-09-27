@@ -13,18 +13,18 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-	site: SITE.url,
-	markdown: {
-		shikiConfig: SITE.shikiConfig,
-	},
-	integrations: [mdx(), tailwind(), sitemap(), robotsTxt(robotsConfig), icon()],
-	vite: {
-		css: {
-			preprocessorOptions: {
-				scss: {
-					additionalData: `@import "src/styles/animations.css";`,
-				},
-			},
-		},
-	},
+  site: SITE.url,
+  markdown: {
+    shikiConfig: SITE.shikiConfig,
+  },
+  integrations: [mdx(), tailwind(), sitemap(), robotsTxt(robotsConfig), icon()],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "src/styles/animations.css";`,
+        },
+      },
+    },
+  },
 });

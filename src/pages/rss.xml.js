@@ -6,28 +6,22 @@ import { SITE, BLOG } from "@config";
 import { COLLECTION_NAMES_LIST } from "../alkaline.config";
 
 export async function GET(context) {
-	const allPosts = await getPosts(COLLECTION_NAMES_LIST);
+  const allPosts = await getPosts(COLLECTION_NAMES_LIST);
 
-	const items = allPosts
-		.sort(
-			(a, b) =>
-				new Date(a.data?.pubDatetime || 0).valueOf() -
-				new Date(b.data?.pubDatetime || 0).valueOf()
-		)
-		.map((post) => ({
-			title: post.data?.title || "Untitled",
-			pubDate: post.data?.pubDatetime
-				? new Date(post.data.pubDatetime)
-				: new Date(),
-			description: post.data?.description || "",
-			link: `${context.site}${post.collection}/${post.id}/`,
-		}));
+  const items = allPosts
+    .sort((a, b) => new Date(a.data?.pubDatetime || 0).valueOf() - new Date(b.data?.pubDatetime || 0).valueOf())
+    .map((post) => ({
+      title: post.data?.title || "Untitled",
+      pubDate: post.data?.pubDatetime ? new Date(post.data.pubDatetime) : new Date(),
+      description: post.data?.description || "",
+      link: `${context.site}${post.collection}/${post.id}/`,
+    }));
 
-	return rss({
-		title: SITE.title,
-		description: BLOG.description || SITE.description,
-		site: context.site,
-		items: items,
-		customData: `<language>${SITE.locale || "en-us"}</language>`,
-	});
+  return rss({
+    title: SITE.title,
+    description: BLOG.description || SITE.description,
+    site: context.site,
+    items: items,
+    customData: `<language>${SITE.locale || "en-us"}</language>`,
+  });
 }

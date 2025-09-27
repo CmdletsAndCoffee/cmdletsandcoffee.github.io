@@ -61,49 +61,31 @@ const {
 <Layout title="Elements">
   <!-- <span class="elements-page"> -->
   <Heading text="Components" />
-  <p class="text-center mx-auto text-2xl px-2 max-w-5xl leading-loose">
-    Alkaline features more than <Neon titleText="24 custom components " />,
-    along with a concise design and typography system.
+  <p class="mx-auto max-w-5xl px-2 text-center text-2xl leading-loose">
+    Alkaline features more than <Neon titleText="24 custom components " />, along with a concise design and typography
+    system.
   </p>
   <section>
     <article>
       <h2>
-        <Icon name="ri:star-fill" width="1.75rem" class="inline -mt-2" />
+        <Icon name="ri:star-fill" width="1.75rem" class="-mt-2 inline" />
         Title
       </h2>
-      <p class="mb-8 ml-2 text-xl">
-        Several configurations are available for the Title component.
-      </p>
+      <p class="mb-8 ml-2 text-xl">Several configurations are available for the Title component.</p>
 
       <Title title="Gradient Title" showTitleBackground={false} />
-      <div class="h-8 border-t-8 border-theme-secondary mb-4"></div>
-      <Title
-        title="With Background"
-        showTitleBackground
-        class="overflow-hidden"
-      />
+      <div class="mb-4 h-8 border-t-8 border-theme-secondary"></div>
+      <Title title="With Background" showTitleBackground class="overflow-hidden" />
       <div class="h-8"></div>
 
-      <Title
-        title="Logo Shown"
-        showTitleBackground
-        forceLogoOnMobile
-        logoImg={logoImg}
-      />
+      <Title title="Logo Shown" showTitleBackground forceLogoOnMobile logoImg={logoImg} />
     </article>
 
     <article class="mt-24">
       <h2>
-        <Icon
-          name="ri:star-fill"
-          width="1.75rem"
-          class="inline -mt-2 mr-2"
-        />Page Header
+        <Icon name="ri:star-fill" width="1.75rem" class="-mt-2 mr-2 inline" />Page Header
       </h2>
-      <p class="mb-8 ml-2 text-xl">
-        Multiple configuration options make it easy to create a variety of
-        headers.
-      </p>
+      <p class="mb-8 ml-2 text-xl">Multiple configuration options make it easy to create a variety of headers.</p>
       <PageHeader
         heading="Page Header"
         description="Lorem ipsum dolor sit amet, Mauris fringilla, nunc at tincidunt fermentum, turpis nunc Max Weinberg, et facilisis leo magna eget nunc. Integer Sona Movsesian, lorem a facilisis fermentum, justo orci."
@@ -122,60 +104,30 @@ const {
 
     <article>
       <h2>
-        <Icon name="ri:star-fill" width="1.75rem" class="inline -mt-2" />
+        <Icon name="ri:star-fill" width="1.75rem" class="-mt-2 inline" />
         Cards
       </h2>
       <p class="mb-8 ml-2 text-xl">
-        There are several configurations available for the card component. These
-        configuration options should make it easy to build a variety of cards.
+        There are several configurations available for the card component. These configuration options should make it
+        easy to build a variety of cards.
       </p>
-      <div
-        class="flex flex-row flex-wrap justify-center items-center md:justify-evenly gap-6 mt-24"
-      >
-        <Card
-          title="Card"
-          description="Card with no shadow."
-          shadowSize="none"
-        />
-        <Card
-          title="Card"
-          description="Card with medium shadow."
-          shadowSize="md"
-        />
-        <Card
-          title="Card"
-          description="Card with large shadow."
-          shadowSize="lg"
-        />
-        <Card
-          title="Card"
-          description="Alt Card with no shadow."
-          shadowSize="none"
-          alt
-        />
-        <Card
-          title="Card"
-          description="Alt card with medium shadow."
-          shadowSize="md"
-          alt
-        />
-        <Card
-          title="Card"
-          description="Alt card with large shadow."
-          shadowSize="lg"
-          alt
-        />
+      <div class="mt-24 flex flex-row flex-wrap items-center justify-center gap-6 md:justify-evenly">
+        <Card title="Card" description="Card with no shadow." shadowSize="none" />
+        <Card title="Card" description="Card with medium shadow." shadowSize="md" />
+        <Card title="Card" description="Card with large shadow." shadowSize="lg" />
+        <Card title="Card" description="Alt Card with no shadow." shadowSize="none" alt />
+        <Card title="Card" description="Alt card with medium shadow." shadowSize="md" alt />
+        <Card title="Card" description="Alt card with large shadow." shadowSize="lg" alt />
       </div>
     </article>
 
     <article class="mt-24">
       <h2>
-        <Icon name="ri:star-fill" width="1.75rem" class="inline -mt-2" />
+        <Icon name="ri:star-fill" width="1.75rem" class="-mt-2 inline" />
         Author with socials
       </h2>
       <p class="mb-8 ml-2 text-xl">
-        A variety of social icons are available for the author component. Easily
-        switch to your favorite icon library.
+        A variety of social icons are available for the author component. Easily switch to your favorite icon library.
       </p>
 
       <div class="ml-8 p-4">
@@ -185,7 +137,7 @@ const {
 
     <article class="mt-24">
       <h2>
-        <Icon name="ri:star-fill" width="1.75rem" class="inline -mt-2" />
+        <Icon name="ri:star-fill" width="1.75rem" class="-mt-2 inline" />
         Tooltip
       </h2>
       <p class="mb-8 ml-2 text-xl">Available in two different styles.</p>
@@ -208,17 +160,14 @@ const {
 
     <article class="mt-24">
       <h2>
-        <Icon name="ri:star-fill" width="1.75rem" class="inline -mt-2" />
+        <Icon name="ri:star-fill" width="1.75rem" class="-mt-2 inline" />
         404
       </h2>
       <p class="mb-8 ml-2 text-xl">A basic 404 page is included.</p>
 
       <div class="ml-8 p-4 text-lg">
         <p>
-          Not all who wonder are lost, but if they are, they'll get a nice <Link
-            href="/404"
-            text="404"
-          /> message.
+          Not all who wonder are lost, but if they are, they'll get a nice <Link href="/404" text="404" /> message.
         </p>
       </div>
     </article>
@@ -228,41 +177,36 @@ const {
 
   <Heading text="Typography" />
 
-  <p class="text-center mx-auto text-2xl px-2 max-w-5xl leading-loose">
-    Alkaline comes with built-in typography, layouts, and essential styling
-    powered by Tailwind CSS. You can easily customize or remove any styling to
-    match your needs.
+  <p class="mx-auto max-w-5xl px-2 text-center text-2xl leading-loose">
+    Alkaline comes with built-in typography, layouts, and essential styling powered by Tailwind CSS. You can easily
+    customize or remove any styling to match your needs.
   </p>
 
   <section class="mt-0">
     <article class="mt-24">
       <h2 class="mb-4">
-        <Icon name="ri:star-fill" width="1.75rem" class="inline -mt-2" />
+        <Icon name="ri:star-fill" width="1.75rem" class="-mt-2 inline" />
         Paragraphs
       </h2>
 
       <p class="max-w-4xl">
-        Lorem ipsum dolor sit amet, Conan O'Brien consectetur adipiscing elit.
-        Sed ut urna nec purus lacinia tincidunt nec Andy Richter. Vivamus
-        efficitur, risus at vehicula fermentum, eros magna Matt O'Brien, non
-        tincidunt lacus magna at eros. Nulla facilisi. In hac habitasse platea
-        dictumst."
+        Lorem ipsum dolor sit amet, Conan O'Brien consectetur adipiscing elit. Sed ut urna nec purus lacinia tincidunt
+        nec Andy Richter. Vivamus efficitur, risus at vehicula fermentum, eros magna Matt O'Brien, non tincidunt lacus
+        magna at eros. Nulla facilisi. In hac habitasse platea dictumst."
       </p>
       <p class="max-w-4xl">
-        Lorem ipsum dolor sit amet, Conan O'Brien consectetur adipiscing elit.
-        Sed ut urna nec purus lacinia tincidunt nec Andy Richter. Vivamus
-        efficitur, risus at vehicula fermentum, eros magna Matt O'Brien, non
-        tincidunt lacus magna at eros. Nulla facilisi. In hac habitasse platea
-        dictumst." nec.
+        Lorem ipsum dolor sit amet, Conan O'Brien consectetur adipiscing elit. Sed ut urna nec purus lacinia tincidunt
+        nec Andy Richter. Vivamus efficitur, risus at vehicula fermentum, eros magna Matt O'Brien, non tincidunt lacus
+        magna at eros. Nulla facilisi. In hac habitasse platea dictumst." nec.
       </p>
     </article>
 
     <article class="mt-24">
       <h2 class="mb-4">
-        <Icon name="ri:star-fill" width="1.75rem" class="inline -mt-2" />
+        <Icon name="ri:star-fill" width="1.75rem" class="-mt-2 inline" />
         Lists
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl">
+      <div class="grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
         <span>
           <h3 class="mb-2">Unordered List</h3>
           <ul class="list-disc pl-5">
@@ -285,36 +229,35 @@ const {
 
     <article class="mt-24">
       <h2 class="mb-4">
-        <Icon name="ri:star-fill" width="1.75rem" class="inline -mt-2" />
+        <Icon name="ri:star-fill" width="1.75rem" class="-mt-2 inline" />
         Blockquotes
       </h2>
 
-      <blockquote class="border-l-4 border-gray-300 pl-4 italic max-w-5xl">
+      <blockquote class="border-gray-300 max-w-5xl border-l-4 pl-4 italic">
         <p>
-          Conan O'Brien consectetur adipiscing elit. Sed ut urna nec purus
-          lacinia tincidunt nec Andy Richter. Vivamus efficitur, risus at
-          vehicula fermentum, eros magna Matt O'Brien, non tincidunt lacus magna
-          at eros. Nulla facilisi. In hac habitasse platea dictumst.
+          Conan O'Brien consectetur adipiscing elit. Sed ut urna nec purus lacinia tincidunt nec Andy Richter. Vivamus
+          efficitur, risus at vehicula fermentum, eros magna Matt O'Brien, non tincidunt lacus magna at eros. Nulla
+          facilisi. In hac habitasse platea dictumst.
         </p>
       </blockquote>
     </article>
 
     <article class="mt-24">
       <h2 class="mb-4">
-        <Icon name="ri:star-fill" width="1.75rem" class="inline -mt-2" />
+        <Icon name="ri:star-fill" width="1.75rem" class="-mt-2 inline" />
         Code
       </h2>
       <p class="mb-4">
         Inline code: <Code code=" const x = 42; " lang="js" inline />
       </p>
-      <p class="mt-8 mb-2">Code block with copy to clipboard:</p>
+      <p class="mb-2 mt-8">Code block with copy to clipboard:</p>
       <CodeCopy lang="astro" code={code} class="xl:w-3/5" />
     </article>
   </section>
 
   <article class="mt-24">
     <h2 class="mb-4">
-      <Icon name="ri:star-fill" width="1.75rem" class="inline -mt-2" />
+      <Icon name="ri:star-fill" width="1.75rem" class="-mt-2 inline" />
       Links
     </h2>
 

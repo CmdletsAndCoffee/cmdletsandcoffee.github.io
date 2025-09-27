@@ -35,17 +35,17 @@
 import Link from "@components/Astro/Link.astro";
 
 interface Props {
-	// Page object containing navigation and current page info //
-	page: {
-		currentPage: number;
-		lastPage: number;
-		url: {
-			prev?: string;
-			next?: string;
-		};
-	};
-	// Optional CSS classes //
-	class?: string | undefined;
+  // Page object containing navigation and current page info //
+  page: {
+    currentPage: number;
+    lastPage: number;
+    url: {
+      prev?: string;
+      next?: string;
+    };
+  };
+  // Optional CSS classes //
+  class?: string | undefined;
 }
 
 const { page, class: className } = Astro.props;
@@ -54,20 +54,11 @@ const { currentPage, lastPage, url } = page;
 const { next, prev } = url;
 ---
 
-<nav class:list={["flex justify-start items-center", className]}>
-	<Link
-		href={prev || "#"}
-		text="← Previous"
-		class:list={["text-theme-primary p-2", { disabled: !prev }]}
-	/>
-		<span class="px-2">
-			Page {currentPage} of {lastPage}
-		</span>
+<nav class:list={["flex items-center justify-start", className]}>
+  <Link href={prev || "#"} text="← Previous" class:list={["p-2 text-theme-primary", { disabled: !prev }]} />
+  <span class="px-2">
+    Page {currentPage} of {lastPage}
+  </span>
 
-		<Link
-			href={next || "#"}
-			text="Next →"
-			class:list={["text-theme-primary p-2", { disabled: !next }]}
-		/>
-
+  <Link href={next || "#"} text="Next →" class:list={["p-2 text-theme-primary", { disabled: !next }]} />
 </nav>

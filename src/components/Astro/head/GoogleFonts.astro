@@ -50,25 +50,13 @@ function buildGoogleFontsUrl(fonts: Font[]) {
 
     if (font.includeItalic) fontQuery += `:ital,wght@`;
 
-    if (
-      font?.fontWeights &&
-      font?.fontWeights?.length > 0 &&
-      !font.includeItalic
-    )
+    if (font?.fontWeights && font?.fontWeights?.length > 0 && !font.includeItalic)
       fontQuery += `:wght@${font.fontWeights.join(";")}`;
 
     // if ital we have to change the format of the fontWeights to match the google fonts api 0,300;0,400;1,300;1,400 etc
-    if (
-      font?.fontWeights &&
-      font?.fontWeights?.length > 0 &&
-      font.includeItalic
-    ) {
-      const regularWeights = font.fontWeights.map(
-        (weight: any) => `0,${weight}`
-      );
-      const italicWeights = font.fontWeights.map(
-        (weight: any) => `1,${weight}`
-      );
+    if (font?.fontWeights && font?.fontWeights?.length > 0 && font.includeItalic) {
+      const regularWeights = font.fontWeights.map((weight: any) => `0,${weight}`);
+      const italicWeights = font.fontWeights.map((weight: any) => `1,${weight}`);
       fontQuery += `${[...regularWeights, ...italicWeights].join(";")}`;
     }
 
@@ -76,10 +64,7 @@ function buildGoogleFontsUrl(fonts: Font[]) {
   });
 
   // Join all query parameters with '&' and return the full URL
-  return (
-    (queryParams.size ? baseUrl + Array.from(queryParams).join("&") : baseUrl) +
-    "&display=swap"
-  );
+  return (queryParams.size ? baseUrl + Array.from(queryParams).join("&") : baseUrl) + "&display=swap";
 }
 ---
 

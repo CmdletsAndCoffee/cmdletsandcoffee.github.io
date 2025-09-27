@@ -32,8 +32,4 @@ export interface Props {
 const { metaTags = [] } = Astro.props;
 ---
 
-{
-  metaTags?.map((tag) => (
-    <meta name={tag.name} property={tag.property} content={tag.content} />
-  ))
-}
+{metaTags?.map((tag) => <meta name={tag.name} property={tag.property} content={tag.content} />)}

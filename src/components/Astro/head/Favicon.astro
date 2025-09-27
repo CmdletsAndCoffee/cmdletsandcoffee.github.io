@@ -32,9 +32,7 @@ const { url = "/favicon.svg", isVector = false } = Astro.props;
 
 <link rel="icon" type="image/svg+xml" href={url} />
 
-{
-  /* Svg will always be vector, but this allows us to force vector for other files if needed */
-}
+{/* Svg will always be vector, but this allows us to force vector for other files if needed */}
 
 {
   (isVector || url.endsWith(".svg")) && (

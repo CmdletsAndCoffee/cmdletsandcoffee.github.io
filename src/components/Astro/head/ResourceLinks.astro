@@ -44,36 +44,28 @@
  */
 
 interface ResourceLinksProps {
-	dnsPrefetchUrls?: string[];
-	preconnectUrls?: { href: string; crossorigin?: boolean }[];
-	preloadResources?: { href: string; as: string; type?: string }[];
-	prefetchResources?: string[];
+  dnsPrefetchUrls?: string[];
+  preconnectUrls?: { href: string; crossorigin?: boolean }[];
+  preloadResources?: { href: string; as: string; type?: string }[];
+  prefetchResources?: string[];
 }
 
 const {
-	dnsPrefetchUrls = [],
-	preconnectUrls = [],
-	preloadResources = [],
-	prefetchResources = [],
+  dnsPrefetchUrls = [],
+  preconnectUrls = [],
+  preloadResources = [],
+  prefetchResources = [],
 } = Astro.props as ResourceLinksProps;
 ---
 
 {dnsPrefetchUrls?.map((url) => <link rel="dns-prefetch" href={url} />)}
 
 {
-	preconnectUrls?.map(({ href, crossorigin }) => (
-		<link
-			rel="preconnect"
-			href={href}
-			crossorigin={crossorigin ? "anonymous" : undefined}
-		/>
-	))
+  preconnectUrls?.map(({ href, crossorigin }) => (
+    <link rel="preconnect" href={href} crossorigin={crossorigin ? "anonymous" : undefined} />
+  ))
 }
 
-{
-	preloadResources?.map(({ href, as, type }) => (
-		<link rel="preload" href={href} as={as} type={type} />
-	))
-}
+{preloadResources?.map(({ href, as, type }) => <link rel="preload" href={href} as={as} type={type} />)}
 
 {prefetchResources?.map((url) => <link rel="prefetch" href={url} />)}

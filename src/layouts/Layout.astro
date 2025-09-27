@@ -85,14 +85,10 @@ const headerLogo = typeof logo === "undefined" ? null : logo; // guard against n
   </head>
   <body class:list={[options, className]}>
     <PatternBackground pattern="circuit" />
-    <div class="flex flex-col min-h-screen mt-0 pt-0">
+    <div class="mt-0 flex min-h-screen flex-col pt-0">
       {
         headerLogo ? (
-          <Title
-            title={title}
-            showTitleBackground={showTitleBackground}
-            logoImg={headerLogo}
-          />
+          <Title title={title} showTitleBackground={showTitleBackground} logoImg={headerLogo} />
         ) : (
           <Title title={title} showTitleBackground={showTitleBackground} />
         )
@@ -102,11 +98,7 @@ const headerLogo = typeof logo === "undefined" ? null : logo; // guard against n
         <!-- content -->
         <slot />
       </main>
-      <Footer
-        author={SITE.author}
-        portfolio={SITE.socials.find((social) => social.platform === "web")
-          ?.url}
-      />
+      <Footer author={SITE.author} portfolio={SITE.socials.find((social) => social.platform === "web")?.url} />
     </div>
     <BackToTop />
   </body>

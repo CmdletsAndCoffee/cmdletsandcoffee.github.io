@@ -16,18 +16,22 @@ const posts = (await getPosts())
     description="Your daily dose of PowerShell, automation, and tech musings."
   />
 
-  <section class="flex flex-col items-center justify-center mt-16 mb-16 fade-in">
-    <a href="/blog" class="bg-theme-primary no-underline text-theme-primary text-xl lg:text-2xl tracking-wide text-center shadow-sm shadow-theme-primary border-2 p-4 rounded-theme hover:bg-theme-secondary hover:text-theme-secondary hover:border-theme-secondary hover:shadow-none transition-all duration-300 ease-in-out">
+  <section class="fade-in mb-16 mt-16 flex flex-col items-center justify-center">
+    <a
+      href="/blog"
+      class="rounded-theme border-2 bg-theme-primary p-4 text-center text-xl tracking-wide text-theme-primary no-underline shadow-sm shadow-theme-primary transition-all duration-300 ease-in-out hover:border-theme-secondary hover:bg-theme-secondary hover:text-theme-secondary hover:shadow-none lg:text-2xl"
+    >
       Explore Posts
     </a>
   </section>
 
-  <section class="flex flex-col items-center justify-center mt-16 mb-48 fade-in">
-    <h2 class="bg-theme-secondary text-theme-secondary p-5 text-center uppercase w-full mb-8 lg:w-auto rounded-theme">
+  <section class="fade-in mb-48 mt-16 flex flex-col items-center justify-center">
+    <h2 class="mb-8 w-full rounded-theme bg-theme-secondary p-5 text-center uppercase text-theme-secondary lg:w-auto">
       Recent Posts
     </h2>
-    <div class="mx-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 mb-16 lg:p-5 build-in">
-      {posts.map((post) => (
+    <div class="build-in mx-0 mb-16 mt-8 grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:p-5">
+      {
+        posts.map((post) => (
           <ClickableCard
             iconName="ri:file-text-line"
             alignIcon="left"
@@ -36,7 +40,8 @@ const posts = (await getPosts())
             description={post.data.description}
             shadowSize="lg"
           />
-      ))}
+        ))
+      }
     </div>
   </section>
 </Layout>
