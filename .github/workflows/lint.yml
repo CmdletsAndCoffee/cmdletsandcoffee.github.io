@@ -2,21 +2,28 @@
 name: Lint Code Base
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
 jobs:
-  editorconfig:
-    name: Check EditorConfig
+  lint:
+    name: Run Linters
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Run EditorConfig Checker
-        uses: editorconfig-checker/action-editorconfig-checker@v1
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          # Exclude files that are not part of the source code
-          exclude: ".git|LICENSE"
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run all linters
+        run: pnpm run lint
