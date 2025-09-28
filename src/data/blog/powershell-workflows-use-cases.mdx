@@ -1,0 +1,113 @@
+---
+title: "Automating the Long Game: An Introduction to PowerShell Workflows"
+pubDatetime: 2023-11-03T12:00:00Z
+description: "Go beyond simple scripts. Learn how PowerShell Workflows can orchestrate complex, long-running tasks that can survive reboots and run steps in parallel."
+tags: [powershell, devops, sysadmin, workflow]
+authorId: 1
+---
+
+As sysadmins, we write scripts to automate tasks. But what happens when the task isn't simple? What if it's a process that takes hours, involves multiple reboots, or requires coordinating steps across several servers at once? A standard PowerShell script can become a fragile, complicated mess in these scenarios.
+
+This is where **PowerShell Workflows** come in. Built on the robust Windows Workflow Foundation (WWF), they are designed specifically for orchestrating long-running, parallel, and interruptible automation.
+
+### What is a PowerShell Workflow?
+
+A PowerShell Workflow looks a lot like a function, but it's defined with the `workflow` keyword instead of `function`.
+
+```powershell
+workflow My-LongRunningProcess {
+    # Workflow activities go here
+}
+```
+
+The key difference is that the code inside a workflow isn't just executed line-by-line. It's translated into a series of "activities" that the WWF engine runs. This engine provides powerful features that standard scripts lack:
+
+- **Persistence:** A workflow's state can be automatically saved to disk at specific points. This means if the server reboots or the script crashes, the workflow can resume from where it left off.
+- **Parallel Execution:** You can run multiple commands or script blocks at the same time, dramatically speeding up tasks that target many machines.
+- **Suspend & Resume:** Workflows can be manually paused and resumed later, allowing for human intervention or waiting for external processes.
+
+### Key Workflow Keywords
+
+To use these features, you'll need to know a few special keywords that only work inside a `workflow` block.
+
+- **`Parallel`**: A script block where all commands run concurrently.
+- **`Sequence`**: Used inside a `Parallel` block to force a subset of commands to run sequentially.
+- **`Checkpoint-Workflow`**: This is the magic command for persistence. When the workflow hits a checkpoint, it saves its current state (including variable values) to disk. After a reboot or crash, it can resume from the last successful checkpoint.
+
+### Use Case 1: Large-Scale Server Patching
+
+Imagine you need to patch and reboot 100 servers. A standard script would do this one by one, taking a massive amount of time. A workflow can revolutionize this process.
+
+**The Challenge:** The process must survive reboots for each server and should be as fast as possible.
+
+**The Workflow Solution:**
+
+```powershell
+workflow Invoke-ServerPatching {
+    param(
+        [string[]]$ComputerName
+    )
+
+    # Process each computer in parallel
+    foreach -parallel ($Computer in $ComputerName) {
+        # Run this block of commands sequentially for each computer
+        Sequence {
+            Write-Output "Starting patches on $Computer..."
+            Invoke-Command -ComputerName $Computer -ScriptBlock { Update-Windows }
+
+            # Save our state before rebooting!
+            Checkpoint-Workflow
+
+            Write-Output "Rebooting $Computer..."
+            Restart-Computer -ComputerName $Computer -Wait
+
+            Write-Output "Post-reboot checks for $Computer..."
+            Invoke-Command -ComputerName $Computer -ScriptBlock { Get-Hotfix -Id 'KB5031356' }
+        }
+    }
+}
+```
+
+Here, the `foreach -parallel` loop starts the patching process on all 100 servers simultaneously. The `Checkpoint-Workflow` command is crucial—it ensures that if the machine running the workflow reboots, it can pick right back up and continue its coordination. The workflow automatically resumes after the `Restart-Computer` command completes for each target.
+
+### Use Case 2: New Employee Onboarding
+
+Onboarding a new employee involves multiple systems and dependencies. Some steps can happen at the same time, while others must wait.
+
+**The Challenge:** A multi-step process involving Active Directory, Exchange, and other services that needs to be reliable and repeatable.
+
+**The Workflow Solution:**
+
+```powershell
+workflow New-EmployeeOnboarding {
+    param(
+        [string]$UserName,
+        [string]$FirstName,
+        [string]$LastName
+    )
+
+    # These two steps have no dependency on each other, so run them in parallel.
+    Parallel {
+        # Sequence 1: Active Directory tasks
+        Sequence {
+            New-ADUser -Name $UserName # ... other params
+            # Checkpoint after the most critical step
+            Checkpoint-Workflow
+            Enable-ADAccount -Identity $UserName
+        }
+
+        # Sequence 2: Home drive creation
+        New-HomeDirectory -UserName $UserName
+    }
+
+    # This step must happen after the AD user is created.
+    New-Mailbox -User $UserName
+    Write-Output "Onboarding for $UserName complete."
+}
+```
+
+This workflow speeds up the process by creating the AD user and the home directory in parallel. It uses a checkpoint to ensure that if the script fails after creating the user, it won't try to create it again on a resume.
+
+### Conclusion
+
+While not necessary for every script, PowerShell Workflows are an incredibly powerful tool for the right job. When you face a task that is long-running, needs to survive interruptions, or could benefit from parallel execution, think beyond a standard function. By leveraging the `workflow` keyword and its special capabilities, you can build automation that is more robust, resilient, and efficient.
