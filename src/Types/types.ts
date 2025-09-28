@@ -143,14 +143,6 @@ export function getSocialLink(platform: string, username: string): string {
       return `https://www.instagram.com/${username}`;
     case "linkedin":
       return `https://www.linkedin.com/in/${username}`;
-    case "mastodon_old":
-      // NOTE: Mastodon usernames require the server instance, e.g., 'user@server.com'.
-      // This assumes a default instance if only a username is provided.
-      if (!username.includes("@")) {
-        return `https://mastodon.social/@${username}`;
-      }
-      const [user, domain] = username.split("@");
-      return `https://${domain}/@${user}`;
     case "medium":
       return `https://medium.com/@${username}`;
     case "pinterest":

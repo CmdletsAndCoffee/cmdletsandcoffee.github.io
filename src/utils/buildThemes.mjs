@@ -1,3 +1,4 @@
+/* eslint-env node */
 // Do not touch this file: Builds themes from the theme.css file. It also builds the types (based on the theme names - check the bottom /src/Types/types.ts). It also creates a themeNames file.
 
 import postcss from "postcss";
@@ -9,6 +10,7 @@ const inputFile = path.resolve("src/styles/themes.css");
 const outputTypeFile = path.resolve("./src/Types/theme-names.ts");
 const outputNamesFile = path.resolve("./src/utils/themeNames.js");
 
+/* eslint-disable no-undef */
 async function extractThemeNames() {
   try {
     const cssContent = await readFile(inputFile, "utf-8");
@@ -51,7 +53,7 @@ ${themeNames.map((name) => `  | "${name}"`).join("\n")};
 `;
 
   const namesContent = `// This file is auto-generated. Do not edit manually.
-export const themeNames = [${themeNames.map((name) => `\'${name}\'`).join(", ")}];
+export const themeNames = [${themeNames.map((name) => `'${name}'`).join(", ")}];
 `;
 
   try {
@@ -92,3 +94,4 @@ main().catch((error) => {
   console.error(chalk.red(`Unhandled error: ${error.message}`));
   process.exit(1);
 });
+/* eslint-enable no-undef */

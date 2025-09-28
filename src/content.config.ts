@@ -5,7 +5,6 @@ https://docs.astro.build/en/guides/content-collections/
 */
 
 import { SITE, COLLECTION_NAMES_LIST } from "./alkaline.config";
-// @ts-ignore
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
@@ -45,11 +44,9 @@ const postCollectionSchema = {
 // Advanced customization options //
 // These options are useful for granular customization of multiple collections //
 // use destructuring for overrides or to add additional fields //
-
-const collectionSchemas: { [key: string]: any } = {};
+const collectionSchemas: Record<string, ReturnType<typeof defineCollection>> = {};
 
 // loops through each collection and define the schema, and allows for overrides
-// @ts-ignore
 collectionNames.forEach((collectionName) => {
   collectionSchemas[collectionName] = defineCollection({
     loader: glob({ pattern: "*.md*", base: "./src/data/" + collectionName.toLowerCase() }),

@@ -1,5 +1,6 @@
 ---
 // Layout component that wraps around pages and blog posts, providing consistent structure and styling. you can read more about it here: https://docs.astro.build/en/guides/layouts/
+import type { CollectionEntry } from "astro:content";
 
 import { COLLECTION_NAMES_LIST } from "src/alkaline.config";
 import { SITE } from "src/alkaline.config";
@@ -11,9 +12,18 @@ import Tag from "@components/Astro/utils/Tag.astro";
 import Heading from "@components/Astro/Heading.astro";
 import Author from "@components/Astro/Author.astro";
 
+type Post = CollectionEntry<(typeof COLLECTION_NAMES_LIST)[number]>;
+
+interface Page {
+  total: number;
+  currentPage: number;
+  lastPage: number;
+  url: { prev?: string; next?: string };
+}
+
 interface Props {
-  posts: any;
-  page?: any;
+  posts: Post[];
+  page?: Page;
   collectionName: (typeof COLLECTION_NAMES_LIST)[number] | string | undefined;
   title?: string | undefined;
   description?: string;
@@ -35,9 +45,7 @@ const {
 
 const options = { "rounded-theme": true };
 
-posts?.sort(
-  (a: any, b: any) => new Date(b.data?.pubDatetime || 0).valueOf() - new Date(a.data?.pubDatetime || 0).valueOf()
-);
+posts?.sort((a, b) => new Date(b.data.pubDatetime || 0).valueOf() - new Date(a.data.pubDatetime || 0).valueOf());
 ---
 
 <Layout title={title} description={description} class={className}>
@@ -52,7 +60,7 @@ posts?.sort(
   <section class="mt-0 md:mx-auto md:max-w-3xl">
     {!posts?.length && <p class="text-theme-primary">No posts found.</p>}
     {
-      posts?.map((post: any) => (
+      posts?.map((post) => (
         <article class="mb-10" id={post.id}>
           <a
             href={`/${post.collection || collectionName}/${post.id}`}
@@ -96,7 +104,7 @@ posts?.sort(
             <Icon name="ri:quill-pen-line" size="16" class="mr-0.5 inline align-middle" />
             Posted by:
             <Author
-              authorId={post.data.authorId || ""}
+              authorId={post.data.authorId}
               pubDateTime={new Date(post.data.pubDatetime)}
               class="ml-0.5 mt-2 inline font-mono not-italic"
             />
@@ -106,6 +114,6 @@ posts?.sort(
     }
   </section>
   <div class="flex justify-center">
-    {SITE.postsPerPage < page?.total && <Pagination page={page} />}
+    {page && SITE.postsPerPage < page.total && <Pagination page={page} />}
   </div>
 </Layout>

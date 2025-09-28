@@ -1,10 +1,11 @@
 // Tailwind config -> https://v3.tailwindcss.com/docs/theme
 
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require("tailwindcss/defaultTheme");
-const colors = require("tailwindcss/colors");
+import defaultTheme from "tailwindcss/defaultTheme";
+import colors from "tailwindcss/colors";
+import typography from "@tailwindcss/typography";
 
-const { SITE } = require("./src/alkaline.config");
+import { SITE } from "./src/alkaline.config.ts";
 
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -120,7 +121,7 @@ export default {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [typography],
 };
 
 /**

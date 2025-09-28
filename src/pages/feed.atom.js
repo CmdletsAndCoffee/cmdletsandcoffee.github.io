@@ -26,7 +26,7 @@ export async function GET(context) {
   </author>
   ${sortedPosts
     .map((post) => {
-      const postUrl = `${context.site}${post.collection}/${post.slug}/`;
+      const postUrl = `${context.site}${post.collection}/${post.id}/`;
       return `<entry>
         <title>${post.data.title}</title>
         <link href="${postUrl}"/>
@@ -39,7 +39,9 @@ export async function GET(context) {
     .join("")}
 </feed>`.trim();
 
+  /* eslint-disable no-undef */
   return new Response(atomFeed, {
     headers: { "Content-Type": "application/atom+xml" },
   });
 }
+/* eslint-enable no-undef */
