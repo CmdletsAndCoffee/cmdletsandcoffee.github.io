@@ -1,0 +1,53 @@
+---
+title: "A SysAdmin's Guide to Git: Stop Losing Your PowerShell Scripts"
+pubDatetime: 2023-10-28T12:00:00Z
+description: "Tired of 'script_v2_final_final.ps1'? Learn how sysadmins can use Git and GitHub to track changes, recover from mistakes, and collaborate on PowerShell scripts like a pro."
+tags: [powershell, devops, sysadmin, git, github]
+authorId: 1
+---
+
+If you're a sysadmin writing PowerShell scripts, you've probably lived this nightmare. Your scripts folder looks something like this:
+
+- `Deploy-WebApp_v1.ps1`
+- `Deploy-WebApp_v2_final.ps1`
+- `Deploy-WebApp_v2_final_BROKEN.ps1`
+- `Deploy-WebApp_v3_ForRealThisTime.ps1`
+
+This isn't just messy; it's dangerous. It's hard to know which version is correct, what changes were made, and how to roll back if something goes wrong. This is a classic sign that you need to adopt a core developer practice: version control.
+
+### What are Git and GitHub?
+
+**Git** is a version control system that tracks changes to your files over time. Instead of saving entire copies of a file, it saves a snapshot of the changes, along with a message explaining _why_ the change was made. It's like an infinite "undo" button for your entire project.
+
+**GitHub** (along with alternatives like GitLab and Azure DevOps) is a web platform for hosting your Git repositories. It's the cloud for your code, providing a central place to store your scripts, collaborate with your team, and manage your work.
+
+### Why Should a SysAdmin Care?
+
+1.  **Complete Change History:** You have a permanent, searchable record of every change made to your scripts. Who changed what, when did they change it, and why? It's all there in the `git log`.
+2.  **Fearless Mistake Recovery:** Accidentally delete a critical function or break a working script? With Git, you can revert to any previous version of your script in seconds. No more panic.
+3.  **Safe Experimentation with Branches:** Want to try adding a new, complex feature to a script? Create a **branch**—a separate line of development. You can experiment freely without touching your working version. If it works, you **merge** it back. If it doesn't, you just delete the branch.
+4.  **Seamless Collaboration:** If you work on a team, Git and GitHub are essential. Team members can work on the same scripts, review each other's changes through Pull Requests, and merge them together without overwriting work.
+
+### Getting Started in 60 Seconds
+
+Getting started is simple. Once you install Git, you can "initialize" a repository in your scripts folder:
+
+```bash
+# Navigate to your scripts folder
+cd C:\MyScripts
+
+# Initialize a new Git repository in this folder
+git init
+
+# Add all files in the folder to be tracked
+git add .
+
+# Save your first "snapshot" (a commit) with a descriptive message
+git commit -m "Initial commit of my admin scripts"
+```
+
+From there, you can create a repository on GitHub and "push" your code to it, giving you a remote backup and a platform for collaboration.
+
+### Conclusion
+
+Using Git isn't just for full-time software developers. It's a foundational tool for anyone who writes and maintains code—and that includes sysadmins writing PowerShell. By adopting version control, you bring professionalism, safety, and sanity to your scripting workflow. You'll spend less time figuring out which `_final_v2` script is the right one and more time building reliable automation.

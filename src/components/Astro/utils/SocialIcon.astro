@@ -29,62 +29,46 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
-	platform: string;
-	url: string;
-	username?: string;
-	size?: number;
-	fill?: boolean;
-	iconPrefix?: string; //  i.e. "ri"
-	class?: string | undefined;
+  platform: string;
+  url: string;
+  username?: string;
+  size?: number;
+  fill?: boolean;
+  iconPrefix?: string; //  i.e. "ri"
+  class?: string | undefined;
 }
 
-const {
-	platform,
-	url,
-	username,
-	size = 24,
-	fill = false,
-	iconPrefix = "ri",
-	class: className,
-} = Astro.props;
+const { platform, url, username, size = 24, fill = false, iconPrefix = "ri", class: className } = Astro.props;
 
 function buildIconName(platform: string, fill: boolean, iconPrefix: string) {
-	const iconName = () => {
-		switch (platform) {
-			case "web":
-				return "globe";
-			case "email":
-				return "mail-open";
-			case "twitter":
-				return "twitter";
-			default:
-				return platform;
-		}
-	};
+  const iconName = () => {
+    switch (platform) {
+      case "web":
+        return "globe";
+      case "email":
+        return "mail-open";
+      case "twitter":
+        return "twitter";
+      default:
+        return platform;
+    }
+  };
 
-	const iconModifier = fill ? "fill" : "line";
+  const iconModifier = fill ? "fill" : "line";
 
-	return `${iconPrefix}:${iconName()}-${iconModifier}`;
+  return `${iconPrefix}:${iconName()}-${iconModifier}`;
 }
 
 let iconName;
 switch (platform) {
-	case "atom":
-		iconName = "eos-icons:atom-electron";
-		break;
-	default:
-		iconName = buildIconName(platform, fill, iconPrefix);
+  case "atom":
+    iconName = "eos-icons:atom-electron";
+    break;
+  default:
+    iconName = buildIconName(platform, fill, iconPrefix);
 }
 ---
 
-<a
-	href={platform === "email" ? `mailto:${url}` : url}
-	class="hover:text-theme-accent no-underline m-0 p-0"
->
-	<Icon
-		name={iconName}
-		size={size}
-		title={username || platform}
-		class:list={["mt-1 mr-2", className]}
-	/>
+<a href={platform === "email" ? `mailto:${url}` : url} class="m-0 p-0 no-underline hover:text-theme-accent">
+  <Icon name={iconName} size={size} title={username || platform} class:list={["mr-2 mt-1", className]} />
 </a>

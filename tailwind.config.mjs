@@ -1,141 +1,127 @@
 // Tailwind config -> https://v3.tailwindcss.com/docs/theme
 
-
-
-
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require("tailwindcss/defaultTheme");
-const colors = require("tailwindcss/colors");
+import defaultTheme from "tailwindcss/defaultTheme";
+import colors from "tailwindcss/colors";
+import typography from "@tailwindcss/typography";
 
-const { SITE } = require("./src/alkaline.config");
+import { SITE } from "./src/alkaline.config.ts";
 
 export default {
-	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
-	darkMode: "class",
-	theme: {
-		colors: {
-			// optionally add more colors from tailwindcss/colors
-			// https://tailwindcss.com/docs/customizing-colors#default-color-palette
-			// e.g. red: colors.red, blue: colors.blue, etc.
-			slate: colors.slate,
-			stone: colors.stone,
-			zinc: colors.zinc,
-			white: colors.white,
-			black: colors.black,
-			transparent: "transparent",
-			// makes the custom colors available in the theme object so we can use them in utility classes (e.g. focus:ring-theme-accent)
-			theme: {
-				primary: "var(--color-accent)",
-				secondary: "var(--color-accent-alt)",
-			},
-		},
-		backgroundColor: {
-			slate: colors.slate,
-			stone: colors.stone,
-			zinc: colors.zinc,
-			white: colors.white,
-			black: colors.black,
-			transparent: 'transparent',
-			theme: {
-				primary: "var(--color-background, #ffffff)",
-				secondary: "var(--color-text, #000000)",
-				accent: "var(--color-accent, #3498db)",
-				"accent-alt": "var(--color-accent-alt, #e67e22)",
-			},
-		},
-		backgroundImage: {
-			"gradient-linear": generateGradient({
-				type: "linear",
-				angle: 145,
-				colors: ["var(--color-background)", "var(--color-gradient)"],
-			}),
-			"gradient-radial": generateGradient({
-				type: "radial",
-				position: "bottom",
-				colors: [
-					"var(--color-gradient)",
-					"var(--color-accent)",
-					"var(--color-accent-alt)",
-					"var(--color-shadow)",
-
-				],
-			}),
-		},
-		borderColor: {
-			slate: colors.slate,
-			stone: colors.stone,
-			zinc: colors.zinc,
-			white: colors.white,
-			black: colors.black,
-			transparent: 'transparent',
-			theme: {
-				primary: "var(--color-accent)",
-				secondary: "var(--color-accent-alt)",
-			},
-		},
-		boxShadowColor: {
-			theme: {
-				primary: "var(--color-shadow)",
-				secondary: "var(--color-text)",
-			},
-		},
-		textColor: {
-			slate: colors.slate,
-			stone: colors.stone,
-			zinc: colors.zinc,
-			white: colors.white,
-			black: colors.black,
-			transparent: 'transparent',
-			theme: {
-				primary: "var(--color-text)",
-				secondary: "var(--color-background)",
-				accent: "var(--color-accent)",
-				"accent-alt": "var(--color-accent-alt)",
-			},
-		},
-		textDecorationColor: {
-			theme: {
-				primary: "var(--color-accent)",
-				secondary: "var(--color-accent-alt)",
-			},
-		},
-		fontFamily: {
-			sans: [
-				`"${SITE.fonts
-					.find((o) => o.typeface === "sans")
-					?.fontFamily.replace(/\+/g, " ")}"`,
-				...defaultTheme.fontFamily.sans,
-			],
-			serif: [
-				`"${SITE.fonts
-					.find((o) => o.typeface === "serif")
-					?.fontFamily.replace(/\+/g, " ")}"`,
-				...defaultTheme.fontFamily.serif,
-			],
-			mono: [
-				`"${SITE.fonts
-					.find((o) => o.typeface === "mono")
-					?.fontFamily.replace(/\+/g, " ")}"`,
-				...defaultTheme.fontFamily.mono,
-			],
-		},
-		typography: {
-			DEFAULT: {
-				css: {
-					maxWidth: "85ch",
-				},
-			},
-		},
-		minHeight: {
-			screen: "100vh",
-		},
-		extend: {
-			borderRadius: {
-				theme: "var(--border-radius)",
-			},
-		},
-	},
-	plugins: [require("@tailwindcss/typography")],
+  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  darkMode: "class",
+  theme: {
+    colors: {
+      // optionally add more colors from tailwindcss/colors
+      // https://tailwindcss.com/docs/customizing-colors#default-color-palette
+      // e.g. red: colors.red, blue: colors.blue, etc.
+      slate: colors.slate,
+      stone: colors.stone,
+      zinc: colors.zinc,
+      white: colors.white,
+      black: colors.black,
+      transparent: "transparent",
+      // makes the custom colors available in the theme object so we can use them in utility classes (e.g. focus:ring-theme-accent)
+      theme: {
+        primary: "var(--color-accent)",
+        secondary: "var(--color-accent-alt)",
+      },
+    },
+    backgroundColor: {
+      slate: colors.slate,
+      stone: colors.stone,
+      zinc: colors.zinc,
+      white: colors.white,
+      black: colors.black,
+      transparent: "transparent",
+      theme: {
+        primary: "var(--color-background, #ffffff)",
+        secondary: "var(--color-text, #000000)",
+        accent: "var(--color-accent, #3498db)",
+        "accent-alt": "var(--color-accent-alt, #e67e22)",
+      },
+    },
+    backgroundImage: {
+      "gradient-linear": generateGradient({
+        type: "linear",
+        angle: 145,
+        colors: ["var(--color-background)", "var(--color-gradient)"],
+      }),
+      "gradient-radial": generateGradient({
+        type: "radial",
+        position: "bottom",
+        colors: ["var(--color-gradient)", "var(--color-accent)", "var(--color-accent-alt)", "var(--color-shadow)"],
+      }),
+    },
+    borderColor: {
+      slate: colors.slate,
+      stone: colors.stone,
+      zinc: colors.zinc,
+      white: colors.white,
+      black: colors.black,
+      transparent: "transparent",
+      theme: {
+        primary: "var(--color-accent)",
+        secondary: "var(--color-accent-alt)",
+      },
+    },
+    boxShadowColor: {
+      theme: {
+        primary: "var(--color-shadow)",
+        secondary: "var(--color-text)",
+      },
+    },
+    textColor: {
+      slate: colors.slate,
+      stone: colors.stone,
+      zinc: colors.zinc,
+      white: colors.white,
+      black: colors.black,
+      transparent: "transparent",
+      theme: {
+        primary: "var(--color-text)",
+        secondary: "var(--color-background)",
+        accent: "var(--color-accent)",
+        "accent-alt": "var(--color-accent-alt)",
+      },
+    },
+    textDecorationColor: {
+      theme: {
+        primary: "var(--color-accent)",
+        secondary: "var(--color-accent-alt)",
+      },
+    },
+    fontFamily: {
+      sans: [
+        `"${SITE.fonts.find((o) => o.typeface === "sans")?.fontFamily.replace(/\+/g, " ")}"`,
+        ...defaultTheme.fontFamily.sans,
+      ],
+      serif: [
+        `"${SITE.fonts.find((o) => o.typeface === "serif")?.fontFamily.replace(/\+/g, " ")}"`,
+        ...defaultTheme.fontFamily.serif,
+      ],
+      mono: [
+        `"${SITE.fonts.find((o) => o.typeface === "mono")?.fontFamily.replace(/\+/g, " ")}"`,
+        ...defaultTheme.fontFamily.mono,
+      ],
+    },
+    typography: {
+      DEFAULT: {
+        css: {
+          maxWidth: "85ch",
+        },
+      },
+    },
+    minHeight: {
+      screen: "100vh",
+    },
+    extend: {
+      borderRadius: {
+        theme: "var(--border-radius)",
+      },
+    },
+  },
+  plugins: [typography],
 };
 
 /**
@@ -151,20 +137,10 @@ export default {
  * @returns {string} The generated gradient string.
  */
 
-function generateGradient({
-	type,
-	colors,
-	direction = "top",
-	angle = 0,
-	shape = "ellipse",
-	position = "center",
-}) {
-	if (!Array.isArray(colors) || colors.length < 2)
-		throw new Error("At least two colors must be provided");
+function generateGradient({ type, colors, direction = "top", angle = 0, shape = "ellipse", position = "center" }) {
+  if (!Array.isArray(colors) || colors.length < 2) throw new Error("At least two colors must be provided");
 
-	if (type === "radial")
-		return `radial-gradient(${shape} at ${position}, ${colors.join(", ")})`;
+  if (type === "radial") return `radial-gradient(${shape} at ${position}, ${colors.join(", ")})`;
 
-	return `linear-gradient(${angle ? angle + "deg" : "to " + direction
-		}, ${colors.join(", ")})`;
+  return `linear-gradient(${angle ? angle + "deg" : "to " + direction}, ${colors.join(", ")})`;
 }

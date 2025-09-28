@@ -23,11 +23,7 @@
 
 import type { ShikiConfig } from "astro";
 // not sure why shiki types show an error here, but it seems to work fine
-import type {
-  BundledLanguage,
-  LanguageRegistration,
-  SpecialLanguage,
-} from "shiki";
+import type { BundledLanguage, LanguageRegistration, SpecialLanguage } from "shiki";
 
 import { SITE } from "src/alkaline.config";
 import { Code } from "astro:components";
@@ -40,12 +36,7 @@ interface Props {
   class?: string | undefined;
 }
 
-const {
-  code = "",
-  lang,
-  theme = SITE.shikiConfig.theme,
-  class: className,
-} = Astro.props;
+const { code = "", lang, theme = SITE.shikiConfig.theme, class: className } = Astro.props;
 
 const options = { "rounded-theme": true };
 ---
@@ -54,7 +45,7 @@ const options = { "rounded-theme": true };
   <CopyToClipboard
     textToCopy={code}
     aria-label="Copy code to clipboard"
-    class="absolute top-4 right-4 bg-slate-600/30 hover:bg-slate-600/50 text-white"
+    class="absolute right-4 top-4 bg-slate-600/30 text-white hover:bg-slate-600/50"
   />
 
   <Code lang={lang} theme={theme} code={code} class:list={options} />

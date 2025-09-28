@@ -1,0 +1,78 @@
+---
+title: "Think in Tests: 5 Questions to Ask Before Writing Any PowerShell"
+pubDatetime: 2023-10-30T12:00:00Z
+description: "Embrace Test-Driven Development (TDD) by asking the right questions. Learn how to design better, more reliable PowerShell scripts from the start."
+tags: [powershell, devops, sysadmin, tdd, pester]
+authorId: 1
+---
+
+You've embraced the Red-Green-Refactor cycle of Test-Driven Development (TDD). You have Pester installed and you're ready to write some high-quality, reliable PowerShell code. But where do you start? The blinking cursor on a blank test file can be just as intimidating as a blank script file.
+
+The power of TDD isn't just in the tests themselves; it's in the way it forces you to _think_ before you code. By asking a few key questions upfront, you can design better, more testable, and more resilient scripts from the very beginning.
+
+Here are five questions to ask yourself before you write a single line of implementation code.
+
+### 1. What is the single, most basic success case? (The "Happy Path")
+
+Before you worry about errors or edge cases, define what success looks like. What is the simplest possible input that should produce a correct, predictable output?
+
+Let's say you're writing a function to create a new user in Active Directory. The happy path isn't creating a user with every possible attribute. It's the bare minimum.
+
+- **Question:** "What's the simplest way `New-ADUser` can succeed?"
+- **Answer:** "Given a username, a temporary password, and an OU path, the function should create the user without errors."
+
+This becomes your first test. You'll write a Pester `It` block that describes this exact scenario. This forces you to focus on the core purpose of your function first.
+
+```powershell
+Describe 'New-ADUserWrapper' {
+    It 'Should create a user when given valid inputs' {
+        # Mock New-ADUser so we don't actually create a user
+        Mock New-ADUser { return $true }
+
+        # Call our function
+        $result = New-ADUserWrapper -UserName 'test.user' -Password '...'
+
+        # Assert that our mock was called correctly
+        $result | Should -Be $true
+        Assert-MockCalled New-ADUser -Exactly 1
+    }
+}
+```
+
+### 2. What happens if the input is wrong? (Garbage In)
+
+Now think about failure. What are the obvious ways a user (or another script) could provide bad input?
+
+- What if a required parameter is missing (e.g., no username)?
+- What if the input is in the wrong format (e.g., an invalid email address)?
+- What if a parameter value is null or an empty string?
+
+Each of these "garbage in" scenarios becomes a new test. Writing these tests forces you to build robust parameter validation into your function from the start, rather than adding it as an afterthought.
+
+### 3. What happens if an external dependency fails?
+
+Your script doesn't live in a vacuum. It interacts with services, files, and APIs. What happens when those things aren't available?
+
+- What if the Active Directory domain controller is unreachable?
+- What if the file you're trying to read doesn't exist?
+- What if the REST API you're calling returns a `500` error?
+
+Using Pester's `Mock` command is crucial here. You can simulate these external failures and write tests to ensure your script handles them gracefully. Does it throw a terminating error? Does it return a helpful message? Your tests will define and enforce this behavior.
+
+### 4. What are the edge cases?
+
+Edge cases are the tricky scenarios that often get missed.
+
+- What if the username already exists?
+- What if the script is run by a user without the necessary permissions?
+- What if a file path contains special characters?
+
+Thinking about these situations and writing tests for them is what separates a decent script from a production-ready, bulletproof one.
+
+### 5. What should the output look like?
+
+Finally, consider what your function should return. Should it be a simple boolean (`$true`/`$false`)? A custom object with detailed information? Or should it write to the pipeline and return nothing?
+
+Your tests will define this "contract." A test that checks `($result | Should -BeOfType 'PSCustomObject')` and `($result.UserName | Should -Be 'test.user')` ensures your function's output is consistent and predictable for other scripts that may depend on it.
+
+By starting with these questions, you shift from "How do I write this script?" to "How do I describe what this script should do?". That change in perspective is the key to unlocking the full power of Test-Driven Development.

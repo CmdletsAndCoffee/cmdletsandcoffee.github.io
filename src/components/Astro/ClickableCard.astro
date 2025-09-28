@@ -51,8 +51,8 @@ const options = {
 <a href={href} class="card-link group no-underline">
   <div
     class:list={[
-      "border-2 shadow-theme-primary p-4 w-full h-auto md:max-w-[450px] transition-all duration-300 ease-in-out",
-      "group-hover:bg-theme-secondary group-hover:border-theme-secondary group-hover:shadow-theme-secondary",
+      "h-auto w-full border-2 p-4 shadow-theme-primary transition-all duration-300 ease-in-out md:max-w-[450px]",
+      "group-hover:border-theme-secondary group-hover:bg-theme-secondary group-hover:shadow-theme-secondary",
       options,
       className,
     ]}
@@ -69,18 +69,18 @@ const options = {
     >
       <span class="flex items-center gap-4">
         {
-          iconName && alignIcon === 'left' && (
+          iconName && alignIcon === "left" && (
             <Fragment>
               <Icon name={iconName} width={42} height={42} />
-              <span class="md:flex-1 sm:border-b sm:border-theme-primary group-hover:border-theme-secondary" />
+              <span class="group-hover:border-theme-secondary sm:border-b sm:border-theme-primary md:flex-1" />
             </Fragment>
           )
         }
         {title}
         {
-          iconName && alignIcon === 'right' && (
+          iconName && alignIcon === "right" && (
             <Fragment>
-              <span class="md:flex-1 sm:border-b sm:border-theme-primary group-hover:border-theme-secondary" />
+              <span class="group-hover:border-theme-secondary sm:border-b sm:border-theme-primary md:flex-1" />
               <Icon name={iconName} width={42} height={42} />
             </Fragment>
           )
@@ -95,7 +95,13 @@ const options = {
         "group-hover:border-theme-secondary",
       ]}
     />
-    <p class:list={["text-lg", { "text-theme-primary": !alt, "text-theme-secondary": alt }, "group-hover:text-theme-secondary"]}>
+    <p
+      class:list={[
+        "text-lg",
+        { "text-theme-primary": !alt, "text-theme-secondary": alt },
+        "group-hover:text-theme-secondary",
+      ]}
+    >
       {description}
     </p>
   </div>

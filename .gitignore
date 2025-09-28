@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 .private/
 .vscode/settings.json
+
+*_EDITMSG
+*_TEMPLATE.md

@@ -28,22 +28,17 @@
 import Tag from "@components/Astro/utils/Tag.astro";
 
 interface Props {
-	tags: {
-		name: string;
-		count?: number | string | undefined
-	}[];
-	class?: string | undefined;
+  tags: {
+    name: string;
+    count?: number | string | undefined;
+  }[];
+  class?: string | undefined;
 }
 
 const { tags = [], class: className } = Astro.props;
 ---
 
-<div
-	class:list={[
-		"inline-flex flex-wrap-reverse justify-center items-center px-0 mb-0.5 w-full",
-		className,
-	]}
->
-	{tags.map((tag) => <Tag tag={tag.name} count={tag.count} size="lg" />)}
+<div class:list={["mb-0.5 inline-flex w-full flex-wrap-reverse items-center justify-center px-0", className]}>
+  {tags.map((tag) => <Tag tag={tag.name} count={tag.count} size="lg" />)}
 </div>
 <hr class="my-5 text-theme-accent" />

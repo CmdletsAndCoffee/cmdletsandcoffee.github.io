@@ -31,43 +31,42 @@
 import SocialIcon from "./utils/SocialIcon.astro";
 
 interface Social {
-	platform: string;
-	url?: string | undefined;
-	username: string;
+  platform: string;
+  url?: string | undefined;
+  username: string;
 }
 
 interface Props {
-	socials: Social[];
-	size?: number;
-	fill?: boolean;
-	class?: string | undefined;
+  socials: Social[];
+  size?: number;
+  fill?: boolean;
+  class?: string | undefined;
 }
 
 const { socials, size, fill = false, class: className } = Astro.props;
 
 function getIconSize(count: number): number {
-	// use size if size else size relative to count
-	if (size) return size;
-	if (count <= 3) return 24;
-	if (count <= 7) return 20;
-	return 22;
+  // use size if size else size relative to count
+  if (size) return size;
+  if (count <= 3) return 24;
+  if (count <= 7) return 20;
+  return 22;
 }
 
 const iconSize = getIconSize(socials.length);
 ---
 
-<span class:list={["inline-flex md:max-w-md flex-wrap m-0 p-0 justify-start", className]}>
-	{
-		socials.map((social) => (
-			<SocialIcon
-				platform={social.platform}
-				url={social.url || `https://${social.platform}.com/${social.username}`}
-				username={social.username || ""}
-				size={iconSize}
-				fill={fill}
-				class="-mr-2"
-
-			/>
-		))
-	}
+<span class:list={["m-0 inline-flex flex-wrap justify-start p-0 md:max-w-md", className]}>
+  {
+    socials.map((social) => (
+      <SocialIcon
+        platform={social.platform}
+        url={social.url || `https://${social.platform}.com/${social.username}`}
+        username={social.username || ""}
+        size={iconSize}
+        fill={fill}
+        class="-mr-2"
+      />
+    ))
+  }
 </span>

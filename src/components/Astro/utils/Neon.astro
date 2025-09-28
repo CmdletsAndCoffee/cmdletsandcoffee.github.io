@@ -17,21 +17,17 @@
  */
 
 interface Props {
-	// Text content for the neon effect //
-	titleText?: string;
-	// Additional CSS classes //
-	class?: string |  undefined;
+  // Text content for the neon effect //
+  titleText?: string;
+  // Additional CSS classes //
+  class?: string | undefined;
 }
 
 const { titleText = null, class: className } = Astro.props;
 ---
 
-<span
-	class:list={["neon", className]}
-	data-text={titleText}
-	title={titleText}
->
-	<slot name="neon">
-		{titleText}
-	</slot>
+<span class:list={["neon", className]} data-text={titleText} title={titleText}>
+  <slot name="neon">
+    {titleText}
+  </slot>
 </span>

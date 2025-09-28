@@ -10,3 +10,16 @@ end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
+max_line_length = 120
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
+
+# 2-space indentation for web and data files
+[*.{js,html,css,yml,yaml,json}]
+indent_size = 2
+
+# PowerShell files (maintaining 4-space indent)
+[*.{ps1,psm1,psd1}]
+indent_size = 4

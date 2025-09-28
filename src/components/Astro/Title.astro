@@ -40,13 +40,7 @@ interface Props {
   class?: string | undefined;
 }
 
-const {
-  title,
-  showTitleBackground,
-  class: className,
-  logoImg,
-  forceLogoOnMobile,
-} = Astro.props;
+const { title, showTitleBackground, class: className, logoImg, forceLogoOnMobile } = Astro.props;
 
 const options = {
   "rounded-theme": true,
@@ -55,7 +49,7 @@ const options = {
 
 <div
   class:list={[
-    "flex border-b-8 border-t-8 my-0 py-0",
+    "my-0 flex border-b-8 border-t-8 py-0",
     {
       "border-none": !showTitleBackground,
       "border-theme-secondary": showTitleBackground,
@@ -64,12 +58,12 @@ const options = {
     // "rounded-t-none",
   ]}
 >
-  <div class="flex flex-row items-center justify-center w-full my-0">
+  <div class="my-0 flex w-full flex-row items-center justify-center">
     <h1
       class:list={[
-        "w-full py-0 mx-0",
+        "mx-0 w-full py-0",
         {
-          "is-title-alt leading-none py-5 text-center": showTitleBackground,
+          "is-title-alt py-5 text-center leading-none": showTitleBackground,
           "is-title p-0": !showTitleBackground,
         },
         className,
@@ -79,20 +73,14 @@ const options = {
 
       {
         logoImg && (
-          <span class="flex items-center justify-center w-full">
+          <span class="flex w-full items-center justify-center">
             <span
               class:list={[
-                "rounded-full border-2 border-theme-accent overflow-hidden ml-4 sm:inline-block sm:mr-6 sm:ml-0",
+                "border-theme-accent ml-4 overflow-hidden rounded-full border-2 sm:ml-0 sm:mr-6 sm:inline-block",
                 { hidden: !forceLogoOnMobile },
               ]}
             >
-              <Image
-                src={logoImg}
-                alt="Logo"
-                width={64}
-                height={64}
-                class="w-full"
-              />
+              <Image src={logoImg} alt="Logo" width={64} height={64} class="w-full" />
             </span>
             {title}
           </span>

@@ -21,7 +21,7 @@
  * - Supports custom styling through class prop
  */
 
-import type { Author } from "../../Types/types";
+//import type { Author } from "src/Types/types";
 
 import { AUTHORS_LIST as AUTHORS } from "src/alkaline.config";
 import SocialsCloud from "@components/Astro/SocialsCloud.astro";
@@ -36,15 +36,13 @@ interface Props {
 }
 
 const { authorId, pubDateTime = null, class: className } = Astro.props;
-const displayDate = pubDateTime
-  ? new Date(pubDateTime.getTime() + pubDateTime.getTimezoneOffset() * 60000)
-  : null; // Adjust for local timezone
+const displayDate = pubDateTime ? new Date(pubDateTime.getTime() + pubDateTime.getTimezoneOffset() * 60000) : null; // Adjust for local timezone
 ---
 
-<div class:list={["text-theme-primary font-mono -mt-0.5 ml-0 p-0", className]}>
+<div class:list={["-mt-0.5 ml-0 p-0 font-mono text-theme-primary", className]}>
   <span>
     {AUTHORS.find((author) => author.id === authorId)?.name}
-    <div class="text-sm font-normal -mt-0.5 -mb-3">
+    <div class="-mb-3 -mt-0.5 text-sm font-normal">
       {displayDate ? `- ${displayDate.toDateString()}  ` : ""}
     </div>
   </span>

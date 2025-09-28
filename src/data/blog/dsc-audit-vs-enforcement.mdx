@@ -1,0 +1,101 @@
+---
+title: "DSC for Audit and Enforcement: Apply, Monitor, or Auto-Correct?"
+pubDatetime: 2023-11-04T12:00:00Z
+description: "Unlock the full potential of PowerShell DSC by configuring the Local Configuration Manager (LCM). Learn when to audit, when to enforce, and how to set up each mode."
+tags: [powershell, devops, sysadmin, dsc, lcm]
+authorId: 1
+---
+
+PowerShell Desired State Configuration (DSC) is a powerful platform for defining and maintaining the state of your servers. But DSC isn't just a one-trick pony for initial setup. Its real power lies in its ability to continuously monitor and manage that state over time.
+
+The component responsible for this is the **Local Configuration Manager (LCM)**, the engine that runs on every managed node. The LCM's behavior is highly configurable, allowing you to use DSC for everything from simple auditing to full, self-healing enforcement.
+
+Let's explore the three key `ConfigurationMode` settings that define your DSC strategy.
+
+### The Three Configuration Modes
+
+The `ConfigurationMode` property of the LCM dictates how it handles the configuration you've assigned to it.
+
+1.  **`ApplyOnly`**
+    - **What it does:** The LCM applies the configuration _once_ and then does nothing further. It will not check for configuration drift or attempt to make any corrections later.
+    - **When to use it:** This mode is best for "fire and forget" scenarios, like applying a configuration as part of a server imaging process or a one-time setup script where you don't need ongoing enforcement.
+
+2.  **`ApplyAndMonitor`**
+    - **What it does:** The LCM applies the configuration once. Then, during its regular consistency checks, it will detect and log any configuration drift, but it **will not** automatically fix it.
+    - **When to use it:** This is your **audit mode**. It's perfect for environments with strict change control processes. You can use DSC to get detailed reports on which servers are out of compliance without having the system make unauthorized changes. You can then schedule manual remediation or use the reports for compliance verification.
+
+3.  **`ApplyAndAutoCorrect`**
+    - **What it does:** The LCM applies the configuration and then, during each consistency check, it will automatically re-apply the original configuration to fix any drift it finds.
+    - **When to use it:** This is your **enforcement mode**. It creates self-healing infrastructure. If a service is stopped, a registry key is changed, or a file is modified, the LCM will automatically revert it to the desired state. This is ideal for maintaining consistency across a farm of web servers or other "cattle not pets" infrastructure.
+
+### How to Configure the LCM
+
+You configure the LCM by creating a special type of DSC configuration called a "meta-configuration." It uses the `[DscLocalConfigurationManager()]` attribute.
+
+Here’s how you would create a meta-configuration to set the LCM to `ApplyAndMonitor` mode and have it check for drift every 30 minutes.
+
+```powershell
+[DscLocalConfigurationManager()]
+configuration SetLcmToMonitorMode {
+    Node 'localhost' {
+        Settings {
+            # Set the mode to audit-only
+            ConfigurationMode = 'ApplyAndMonitor'
+            # How often (in minutes) to check for drift
+            ConfigurationModeFrequencyMins = 30
+            # How often (in minutes) to run the configuration
+            RefreshFrequencyMins = 60
+            # Reboot if a resource requires it
+            RebootNodeIfNeeded = $true
+        }
+    }
+}
+
+# --- Execution ---
+
+# 1. Compile the meta-configuration
+SetLcmToMonitorMode
+
+# 2. Apply the meta-configuration to the local machine
+Set-DscLocalConfigurationManager -Path .\SetLcmToMonitorMode -Verbose
+```
+
+To switch to enforcement mode, you would simply change `ConfigurationMode = 'ApplyAndAutoCorrect'` and re-apply the meta-configuration.
+
+### Choosing Your Strategy
+
+#### Use Case: Auditing a Production SQL Server
+
+You want to ensure your production SQL servers maintain a specific security baseline, but you can't allow automated changes during business hours.
+
+- **Strategy:** Use `ApplyAndMonitor`.
+- **Workflow:**
+  1.  Set the LCM on the SQL servers to `ApplyAndMonitor`.
+  2.  Apply your baseline DSC configuration.
+  3.  Periodically run `Test-DscConfiguration` on the servers or check the event logs for drift reports.
+  4.  If `Test-DscConfiguration` returns `$false`, you know the server is out of compliance and can schedule a manual intervention during a maintenance window.
+
+```powershell
+# Check for drift manually
+$isCompliant = Test-DscConfiguration
+if (-not $isCompliant) {
+    Write-Warning "Server is not compliant with the desired state!"
+}
+```
+
+#### Use Case: Maintaining a Fleet of Identical Web Servers
+
+You have a load-balanced web farm of 20 servers that must be identical at all times. Any deviation could cause application errors.
+
+- **Strategy:** Use `ApplyAndAutoCorrect`.
+- **Workflow:**
+  1.  Set the LCM on all web servers to `ApplyAndAutoCorrect`.
+  2.  Apply your web server configuration (IIS features, website files, application pool settings, etc.).
+  3.  If an administrator manually stops a required service or deletes a website file on one of the servers, the LCM will automatically fix the issue during its next consistency check, with no manual intervention required.
+
+### Conclusion
+
+DSC is more than just a setup tool; it's a complete configuration management platform. By understanding and leveraging the LCM's configuration modes, you can tailor your DSC implementation to fit your exact needs—whether that's providing detailed audit reports for compliance or building a fully automated, self-healing infrastructure.
+Choose the right mode for your environment, and let DSC do the heavy lifting of maintaining your desired state.
+
+Happy scripting!
