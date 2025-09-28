@@ -1,7 +1,8 @@
 ---
 import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
-import SplashHeader from "@components/Astro/SplashHeader.astro";import { getPosts } from "@utils/getPosts";
+import SplashHeader from "@components/Astro/SplashHeader.astro";
+import { getPosts } from "@utils/getPosts";
 import ClickableCard from "@components/Astro/ClickableCard.astro";
 import backgroundImage from "@assets/Polygon-Luminary.svg";
 
@@ -12,7 +13,12 @@ const posts = (await getPosts())
 ---
 
 <Layout>
-<SplashHeader heading={SITE.heading} description={SITE.description} backgroundImage={backgroundImage} backgroundOpacity={0.3} />
+  <SplashHeader
+    heading={SITE.heading}
+    description={SITE.description}
+    backgroundImage={backgroundImage}
+    backgroundOpacity={0.3}
+  />
 
   <section class="fade-in mb-16 mt-16 flex flex-col items-center justify-center">
     <a
