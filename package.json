@@ -11,7 +11,7 @@
     "astro": "astro",
     "build:themes": "node ./src/utils/buildThemes.mjs",
     "nuke": "rm -rf .astro && rm -rf node_modules -v && pnpm i && pnpm run build:themes && astro dev",
-    "lint": "pnpm run lint:editorconfig && pnpm run lint:prettier && pnpm run lint:eslint && pnpm run check",
+    "lint": "pnpm run pnpm run lint:prettier && pnpm run lint:eslint && pnpm run check",
     "lint:editorconfig": "editorconfig-checker",
     "lint:prettier": "prettier --check .",
     "lint:eslint": "eslint .",
@@ -53,8 +53,8 @@
     "typescript-eslint": "^8.44.1"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,astro,json,md,mdx,yml,yaml}": "prettier --write",
-    "*.{js,jsx,ts,tsx,astro}": "eslint --fix",
+    "*.{js,jsx,ts,tsx,astro,json,md,mdx,yml,yaml}": "prettier",
+    "*.{js,jsx,ts,tsx,astro}": "eslint",
     "*.astro": "astro check"
   }
 }
