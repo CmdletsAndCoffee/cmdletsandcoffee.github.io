@@ -2,7 +2,7 @@
 // for more information about collections in Astro, see:
 // https://docs.astro.build/en/guides/content-collections/
 
-import { SITE } from "@config";
+import { BLOG, SITE } from "@config";
 import type { PaginateFunction } from "astro";
 import { getPosts } from "@utils/getPosts";
 import Posts from "@layouts/Posts.astro";
@@ -19,4 +19,4 @@ const { page } = Astro.props;
 const posts = page?.data ?? [];
 ---
 
-<Posts posts={posts} page={page} subtitle="Blog Examples" collectionName="blog" title="Blog" />
+<Posts posts={posts} page={page} subtitle={BLOG.subtitle} collectionName="blog" title={BLOG.title} />

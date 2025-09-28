@@ -34,9 +34,9 @@ export const AUTHORS: Author[] = [
     name: "John Galt",
     email: "jg@gulch.com",
     socials: [
-      { platform: "github", username: "whoisjohngalt" },
-      { platform: "web", username: "https://whoisjohngalt.com" },
-      { platform: "linkedin", username: "john-galt-philosopher" },
+      { platform: "github", popup: "Don't find me on GitHub", username: "whoisjohngalt" },
+      { platform: "web", popup: "This website doesn't exist...", username: "https://whoisjohngalt.com" },
+      { platform: "linkedin", popup: "I don't have a LinkedIn", username: "john-galt-philosopher" },
     ],
   },
 ];

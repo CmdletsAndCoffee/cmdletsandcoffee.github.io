@@ -69,7 +69,8 @@ export const Platforms = [
 ] as const;
 
 export type Socials = {
-  platform: (typeof Platforms)[number] | string;
+    platform: (typeof Platforms)[number] | string;
+    popup?: string;
   url?: string;
   username: string;
 };
@@ -90,7 +91,9 @@ export type Site = {
   disableIndexing: boolean;
   faviconSrc?: string;
   shikiConfig: ShikiConfig;
-  description?: string | null;
+  heading?: string;
+  subtitle?: string;
+  description?: string;
   ogImage?: string;
   locale?: string;
   canonicalUrl?: string;
@@ -106,6 +109,7 @@ export type NavEntry = {
 
 export type Blog = {
   title: string;
+  subtitle: string;
   author: string;
   description: string;
   keywords: string[];
@@ -171,6 +175,8 @@ export function getSocialLink(platform: string, username: string): string {
     case "email":
       return `mailto:${username}`;
     case "web":
+    case "rss":
+    case "atom":
     case "global":
       return username; // Assume the username is already a full URL
     default:

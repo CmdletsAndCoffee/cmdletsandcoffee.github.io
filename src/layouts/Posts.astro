@@ -2,7 +2,7 @@
 // Layout component that wraps around pages and blog posts, providing consistent structure and styling. you can read more about it here: https://docs.astro.build/en/guides/layouts/
 import type { CollectionEntry } from "astro:content";
 
-import { COLLECTION_NAMES_LIST } from "src/alkaline.config";
+import { BLOG, COLLECTION_NAMES_LIST } from "src/alkaline.config";
 import { SITE } from "src/alkaline.config";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
@@ -48,8 +48,8 @@ const options = { "rounded-theme": true };
 posts?.sort((a, b) => new Date(b.data.pubDatetime || 0).valueOf() - new Date(a.data.pubDatetime || 0).valueOf());
 ---
 
-<Layout title={title} description={description} class={className}>
-  {subtitle && <Heading text={subtitle} showHeadingBackground />}
+<Layout title={BLOG.title} description={BLOG.description} class={className}>
+  {BLOG.subtitle && <Heading text={BLOG.subtitle} showHeadingBackground />}
   {
     subtitle?.toLowerCase() !== "blog examples" && (
       <span class="block text-center">

@@ -1,4 +1,5 @@
 ---
+import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
 import PageHeader from "@components/Astro/PageHeader.astro";
 import { getPosts } from "@utils/getPosts";
@@ -11,10 +12,7 @@ const posts = (await getPosts())
 ---
 
 <Layout>
-  <PageHeader
-    heading="Welcome to Cmdlets and Coffee"
-    description="Your daily dose of PowerShell, automation, and tech musings."
-  />
+  <PageHeader heading={SITE.heading} description={SITE.description} />
 
   <section class="fade-in mb-16 mt-16 flex flex-col items-center justify-center">
     <a

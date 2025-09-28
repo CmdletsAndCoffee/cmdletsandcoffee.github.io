@@ -30,6 +30,7 @@ import { Icon } from "astro-icon/components";
 
 interface Props {
   platform: string;
+  popup?: string;
   url: string;
   username?: string;
   size?: number;
@@ -38,7 +39,7 @@ interface Props {
   class?: string | undefined;
 }
 
-const { platform, url, username, size = 24, fill = false, iconPrefix = "ri", class: className } = Astro.props;
+const { platform, popup, url, username, size = 24, fill = false, iconPrefix = "ri", class: className } = Astro.props;
 
 function buildIconName(platform: string, fill: boolean, iconPrefix: string) {
   const iconName = () => {
@@ -70,5 +71,5 @@ switch (platform) {
 ---
 
 <a href={platform === "email" ? `mailto:${url}` : url} class="m-0 p-0 no-underline hover:text-theme-accent">
-  <Icon name={iconName} size={size} title={username || platform} class:list={["mr-2 mt-1", className]} />
+  <Icon name={iconName} size={size} title={popup || platform} class:list={["mr-2 mt-1", className]} />
 </a>

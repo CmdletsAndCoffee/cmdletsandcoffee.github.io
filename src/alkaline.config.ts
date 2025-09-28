@@ -1,4 +1,3 @@
-import { Platforms } from "./Types/types";
 import { AUTHORS } from "./data/authors.ts";
 
 import type { Site, Socials, NavEntry, Blog } from "./Types/types";
@@ -13,47 +12,41 @@ import type { Site, Socials, NavEntry, Blog } from "./Types/types";
 
 //  SITE socials - used for the site footer
 // See: ./Types/types.ts for more info on author socials
-export const socials: Socials[] = [
+export const socials: Socials[] =[
   {
-    platform: "email",
-    url: "mockmyberet@me.com",
-    username: "mockmyberet",
+        platform: "email",
+      popup: "Email Me",
+    username: "mockmyberet@me.com",
   },
   {
-    platform: "github",
-    url: "https://github.com/mockmyberet/",
+      platform: "github",
+      popup: "See my GitHub",
     username: "mockmyberet",
   },
   {
     platform: "twitter",
-    url: "https://x.com/mockmyberet",
+    popup: "See my Twitter",
     username: "mockmyberet",
   },
   {
     platform: "bluesky",
-    url: "https://bsky.app/profile/tommybecker.bsky.social",
+    popup: "See me on Bluesky",
     username: "tommybecker.bsky.social",
   },
   {
-    platform: "web",
-    url: "https://chaoticthought.com",
-    username: "chaoticthought",
+      platform: "web",
+        popup: "Visit this other Website",
+    username: "https://chaoticthought.com", // For 'web', username is the full URL
   },
   {
-    platform: "atom",
-    url: "/feed.atom",
-    username: "chaoticthought",
+      platform: "atom",
+        popup: "Subscribe to the Feed",
+    username: "/feed.atom", // For 'atom' or other custom links, username can be the path
   },
 ];
 
-// use in development to easily see all author socials at once, not useful in production, I suggest commenting this out in production
-export const allSocials: Socials[] = Platforms.map((platform) => ({
-  platform,
-  url: `https://${platform}.com`,
-  username: `test_user_${platform}`,
-}));
-
 export const AUTHORS_LIST = AUTHORS;
+const mainAuthor = AUTHORS.find((author) => author.id === 1);
 
 export const SITE: Site = {
   title: "Cmdlets & Coffee",
@@ -61,8 +54,10 @@ export const SITE: Site = {
   faviconSrc: "/favicon.png", // in public directory
   url: "https://cmdletsandcoffee.github.io",
   ogImage: "/og-image.webp", // in public directory
-  author: AUTHORS[0].name, // Made with ❤️ by {your-name}
-  description: "A Neutral Base For Your Next Creation",
+  author: mainAuthor?.name ?? "Cmdlets & Coffee", // Made with ❤️ by {your-name}
+  heading: "Welcome to Cmdlets & Coffee",
+  description:
+    "Serving up your daily brew of PowerShell, automation, and tech musings. Come for the scripts, stay for the conversation.",
   keywords: ["astro", "theme", "blog"],
   disableIndexing: false, // true for no indexing
   socials: socials,
@@ -102,14 +97,6 @@ export const NAVIGATION: NavEntry[] = [
     text: "Home",
   },
   {
-    href: "/elements",
-    text: "Elements",
-  },
-  {
-    href: "/features",
-    text: "Features",
-  },
-  {
     href: "/blog",
     text: "Blog",
   },
@@ -117,19 +104,12 @@ export const NAVIGATION: NavEntry[] = [
     href: "/tags",
     text: "Tags",
   },
-  {
-    href: "/faq",
-    text: "FAQ",
-  },
-  {
-    href: "/404",
-    text: "404",
-  },
 ];
 
 export const BLOG: Blog = {
-  title: "My Blog",
-  author: AUTHORS[0].name,
+  title: "Cmdlets & Coffee",
+  subtitle: "The Coffeehouse",
+  author: mainAuthor?.name ?? "Cmdlets & Coffee",
   description: SITE.description || "",
   keywords: SITE.keywords,
   postsPerPage: SITE.postsPerPage,

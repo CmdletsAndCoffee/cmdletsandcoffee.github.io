@@ -29,6 +29,7 @@
  */
 
 import SocialIcon from "./utils/SocialIcon.astro";
+import { getSocialLink } from "src/Types/types";
 
 interface Social {
   platform: string;
@@ -61,7 +62,8 @@ const iconSize = getIconSize(socials.length);
     socials.map((social) => (
       <SocialIcon
         platform={social.platform}
-        url={social.url || `https://${social.platform}.com/${social.username}`}
+        popup={social.popup}
+        url={social.url || getSocialLink(social.platform, social.username) || "#"}
         username={social.username || ""}
         size={iconSize}
         fill={fill}
