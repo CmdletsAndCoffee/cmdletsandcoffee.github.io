@@ -1,0 +1,54 @@
+---
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  heading?: string;
+  description?: string;
+  backgroundImage?: ImageMetadata;
+  backgroundOpacity?: number;
+  class?: string | undefined;
+}
+
+const { heading, description, backgroundImage, backgroundOpacity, class: className } = Astro.props;
+---
+
+<div
+  class:list={[
+    "splash-header relative flex w-full flex-col items-center justify-between p-4 lg:-mt-16 lg:flex-row lg:p-24",
+    className,
+  ]}
+  style={`--bg-image: url(${backgroundImage?.src}); --bg-opacity: ${backgroundOpacity || 1};`}
+>
+  <div class:list={["mb-8 flex flex-col items-start justify-center lg:mb-0 lg:w-1/2"]}>
+    <h2
+      class:list={[
+        "font-display text-6xl font-medium tracking-wide [text-wrap:balance] lg:text-7xl",
+      ]}
+    >
+      {heading}
+    </h2>
+    <p
+      class:list={[
+        "mt-4 text-xl leading-relaxed tracking-wide text-theme-primary lg:text-2xl 2xl:leading-loose",
+      ]}
+    >
+      {description}
+    </p>
+  </div>
+</div>
+
+<style>
+  .splash-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    opacity: var(--bg-opacity);
+    z-index: -1;
+  }
+</style>
