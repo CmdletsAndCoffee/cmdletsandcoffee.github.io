@@ -12,15 +12,15 @@ import type { Site, Socials, NavEntry, Blog } from "./Types/types";
 
 //  SITE socials - used for the site footer
 // See: ./Types/types.ts for more info on author socials
-export const socials: Socials[] =[
+export const socials: Socials[] = [
   {
-        platform: "email",
-      popup: "Email Me",
+    platform: "email",
+    popup: "Email Me",
     username: "mockmyberet@me.com",
   },
   {
-      platform: "github",
-      popup: "See my GitHub",
+    platform: "github",
+    popup: "See my GitHub",
     username: "mockmyberet",
   },
   {
@@ -34,13 +34,13 @@ export const socials: Socials[] =[
     username: "tommybecker.bsky.social",
   },
   {
-      platform: "web",
-        popup: "Visit this other Website",
+    platform: "web",
+    popup: "Visit this other Website",
     username: "https://chaoticthought.com", // For 'web', username is the full URL
   },
   {
-      platform: "atom",
-        popup: "Subscribe to the Feed",
+    platform: "atom",
+    popup: "Subscribe to the Feed",
     username: "/feed.atom", // For 'atom' or other custom links, username can be the path
   },
 ];

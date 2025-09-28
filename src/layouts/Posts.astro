@@ -33,15 +33,7 @@ interface Props {
   class?: string | undefined;
 }
 
-const {
-  posts,
-  page,
-  collectionName = COLLECTION_NAMES_LIST[0],
-  title,
-  subtitle,
-  description = title,
-  class: className,
-} = Astro.props;
+const { posts, page, collectionName = COLLECTION_NAMES_LIST[0], subtitle, class: className } = Astro.props;
 
 const options = { "rounded-theme": true };
 

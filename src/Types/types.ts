@@ -69,8 +69,8 @@ export const Platforms = [
 ] as const;
 
 export type Socials = {
-    platform: (typeof Platforms)[number] | string;
-    popup?: string;
+  platform: (typeof Platforms)[number] | string;
+  popup?: string;
   url?: string;
   username: string;
 };
