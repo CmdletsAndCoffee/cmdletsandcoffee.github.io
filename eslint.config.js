@@ -26,4 +26,24 @@ export default [
       },
     },
   },
+  {
+    // Define the configuration for API endpoint files.
+    files: ["src/pages/**/*.js", "src/pages/**/*.ts"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+  },
+  {
+    // Define the configuration for API endpoint files.
+    files: ["src/pages/**/*.js", "src/pages/**/*.ts"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+  },
 ];

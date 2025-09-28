@@ -39,9 +39,7 @@ export async function GET(context) {
     .join("")}
 </feed>`.trim();
 
-  /* eslint-disable no-undef */
   return new Response(atomFeed, {
     headers: { "Content-Type": "application/atom+xml" },
   });
 }
-/* eslint-enable no-undef */
