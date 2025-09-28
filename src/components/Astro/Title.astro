@@ -26,6 +26,7 @@
 import type { ImageMetadata } from "astro";
 
 import { Image } from "astro:assets";
+import PatternBackground from "./utils/PatternBackground.astro";
 
 interface Props {
   // Main title text //
@@ -49,7 +50,7 @@ const options = {
 
 <div
   class:list={[
-    "my-0 flex border-b-8 border-t-8 py-0",
+    "my-0 flex border-b-8 border-t-8 py-0 relative",
     {
       "border-none": !showTitleBackground,
       "border-theme-secondary": showTitleBackground,
@@ -58,6 +59,7 @@ const options = {
     // "rounded-t-none",
   ]}
 >
+  {showTitleBackground && <PatternBackground pattern={"circuit"} />}
   <div class="my-0 flex w-full flex-row items-center justify-center">
     <h1
       class:list={[

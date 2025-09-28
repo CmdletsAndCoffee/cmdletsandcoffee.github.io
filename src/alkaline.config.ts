@@ -49,9 +49,10 @@ export const AUTHORS_LIST = AUTHORS;
 const mainAuthor = AUTHORS.find((author) => author.id === 1);
 
 export const SITE: Site = {
-  title: "Cmdlets & Coffee",
+    title: "Cmdlets & Coffee",
+    logo: "/assets/logo.png",
   showTitleBackground: true,
-  faviconSrc: "/favicon.png", // in public directory
+  faviconSrc: "/assets/favicon/favicon.png",
   url: "https://cmdletsandcoffee.github.io",
   ogImage: "/og-image.webp", // in public directory
   author: mainAuthor?.name ?? "Cmdlets & Coffee", // Made with ❤️ by {your-name}
