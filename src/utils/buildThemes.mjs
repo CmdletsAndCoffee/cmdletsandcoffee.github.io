@@ -38,6 +38,7 @@ async function extractThemeNames() {
       }
     });
 
+    /* eslint-disable no-undef */
     return Array.from(themeNames);
   } catch (error) {
     console.error(chalk.red(`Error reading or parsing CSS file: ${error.message}`));
@@ -94,3 +95,4 @@ main().catch((error) => {
   console.error(chalk.red(`Unhandled error: ${error.message}`));
   process.exit(1);
 });
+/* eslint-enable no-undef */
