@@ -74,7 +74,7 @@ const {
       <p class="mb-8 ml-2 text-xl">Several configurations are available for the Title component.</p>
 
       <Title title="Gradient Title" showTitleBackground={false} />
-      <div class="mb-4 h-8 border-t-8 border-theme-secondary"></div>
+      <div class="border-theme-secondary mb-4 h-8 border-t-8"></div>
       <Title title="With Background" showTitleBackground class="overflow-hidden" />
       <div class="h-8"></div>
 
@@ -233,7 +233,7 @@ const {
         Blockquotes
       </h2>
 
-      <blockquote class="border-gray-300 max-w-5xl border-l-4 pl-4 italic">
+      <blockquote class="max-w-5xl border-l-4 border-gray-300 pl-4 italic">
         <p>
           Conan O'Brien consectetur adipiscing elit. Sed ut urna nec purus lacinia tincidunt nec Andy Richter. Vivamus
           efficitur, risus at vehicula fermentum, eros magna Matt O'Brien, non tincidunt lacus magna at eros. Nulla
@@ -250,7 +250,7 @@ const {
       <p class="mb-4">
         Inline code: <Code code=" const x = 42; " lang="js" inline />
       </p>
-      <p class="mb-2 mt-8">Code block with copy to clipboard:</p>
+      <p class="mt-8 mb-2">Code block with copy to clipboard:</p>
       <CodeCopy lang="astro" code={code} class="xl:w-3/5" />
     </article>
   </section>

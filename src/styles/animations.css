@@ -7,7 +7,7 @@
 ======================================
  */
   .neon {
-    @apply relative inline-block font-bold tracking-wider text-theme-accent;
+    @apply text-theme-accent relative inline-block font-bold tracking-wider;
     color: var(--color-accent);
     text-shadow:
       0 0 7px var(--color-accent),

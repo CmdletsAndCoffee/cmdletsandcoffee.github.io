@@ -46,9 +46,9 @@ const { features, class: className } = Astro.props;
   {
     features.map((feature) => (
       <li class="relative mb-8">
-        <h3 class="build-in mb-0 font-mono text-xl font-semibold text-theme-accent">{feature.title}</h3>
+        <h3 class="build-in text-theme-accent mb-0 font-mono text-xl font-semibold">{feature.title}</h3>
         {feature.description && (
-          <p class="fade-in ml-4 mt-2 text-lg italic text-theme-primary">{feature.description}</p>
+          <p class="fade-in text-theme-primary mt-2 ml-4 text-lg italic">{feature.description}</p>
         )}
       </li>
     ))

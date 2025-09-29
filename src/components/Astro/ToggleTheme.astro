@@ -30,7 +30,7 @@ let selectedTheme = themeNames[0];
 <div class:list={["relative mx-0 inline-block px-0", className]}>
   <div
     class:list={[
-      "m-0 min-w-32 border border-theme-secondary bg-theme-secondary text-sm tracking-widest text-theme-secondary shadow shadow-theme-primary",
+      "border-theme-secondary bg-theme-secondary text-theme-secondary shadow-theme-primary m-0 min-w-32 border text-sm tracking-widest shadow",
       options,
     ]}
   >
@@ -39,7 +39,7 @@ let selectedTheme = themeNames[0];
       id="theme-button"
       aria-haspopup="listbox"
       aria-expanded="false"
-      class="w-full py-0 pl-8 pr-2 text-left uppercase"
+      class="w-full py-0 pr-2 pl-8 text-left uppercase"
     >
       {selectedTheme.replace("theme-", "")}
     </button>
@@ -48,7 +48,7 @@ let selectedTheme = themeNames[0];
       role="listbox"
       tabindex="-1"
       class:list={[
-        "shadow-theme-grey invisible absolute right-0 top-12 z-10 m-0 w-max min-w-full -translate-y-2 border border-theme-primary bg-theme-primary p-1 text-theme-primary opacity-0 shadow-md transition-all duration-150 ease-in-out",
+        "shadow-theme-grey border-theme-primary bg-theme-primary text-theme-primary invisible absolute top-12 right-0 z-10 m-0 w-max min-w-full -translate-y-2 border p-1 opacity-0 shadow-md transition-all duration-150 ease-in-out",
         options,
       ]}
     >
@@ -57,10 +57,10 @@ let selectedTheme = themeNames[0];
           <li
             role="option"
             tabindex="0"
-            class="theme-option mx-0 cursor-pointer px-2 py-2 pl-4 text-left uppercase first:pt-2 last:pb-2 hover:bg-theme-secondary hover:text-theme-secondary"
+            class="theme-option hover:bg-theme-secondary hover:text-theme-secondary mx-0 cursor-pointer px-2 py-2 pl-4 text-left uppercase first:pt-2 last:pb-2"
             data-theme={name}
           >
-            <span class="block overflow-hidden text-ellipsis whitespace-nowrap pl-0 pr-2 text-sm">
+            <span class="block overflow-hidden pr-2 pl-0 text-sm text-ellipsis whitespace-nowrap">
               {name.replace("theme-", "").replaceAll("-", " ")}
             </span>
           </li>

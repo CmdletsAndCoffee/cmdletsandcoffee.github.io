@@ -41,4 +41,4 @@ const { tags = [], class: className } = Astro.props;
 <div class:list={["mb-0.5 inline-flex w-full flex-wrap-reverse items-center justify-center px-0", className]}>
   {tags.map((tag) => <Tag tag={tag.name} count={tag.count} size="lg" />)}
 </div>
-<hr class="my-5 text-theme-accent" />
+<hr class="text-theme-accent my-5" />

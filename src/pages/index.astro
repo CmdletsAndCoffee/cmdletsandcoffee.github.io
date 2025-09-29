@@ -20,20 +20,20 @@ const posts = (await getPosts())
     backgroundOpacity={0.3}
   />
 
-  <section class="fade-in mb-16 mt-16 flex flex-col items-center justify-center">
+  <section class="fade-in mt-16 mb-16 flex flex-col items-center justify-center">
     <a
       href="/blog"
-      class="rounded-theme border-2 bg-theme-primary p-4 text-center text-xl tracking-wide text-theme-primary no-underline shadow-sm shadow-theme-primary transition-all duration-300 ease-in-out hover:border-theme-secondary hover:bg-theme-secondary hover:text-theme-secondary hover:shadow-none lg:text-2xl"
+      class="rounded-theme bg-theme-primary text-theme-primary shadow-theme-primary hover:border-theme-secondary hover:bg-theme-secondary hover:text-theme-secondary border-2 p-4 text-center text-xl tracking-wide no-underline shadow-sm transition-all duration-300 ease-in-out hover:shadow-none lg:text-2xl"
     >
       Explore Posts
     </a>
   </section>
 
-  <section class="fade-in mb-48 mt-16 flex flex-col items-center justify-center">
-    <h2 class="mb-8 w-full rounded-theme bg-theme-secondary p-5 text-center uppercase text-theme-secondary lg:w-auto">
+  <section class="fade-in mt-16 mb-48 flex flex-col items-center justify-center">
+    <h2 class="rounded-theme bg-theme-secondary text-theme-secondary mb-8 w-full p-5 text-center uppercase lg:w-auto">
       Recent Posts
     </h2>
-    <div class="build-in mx-0 mb-16 mt-8 grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:p-5">
+    <div class="build-in mx-0 mt-8 mb-16 grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:p-5">
       {
         posts.map((post) => (
           <ClickableCard

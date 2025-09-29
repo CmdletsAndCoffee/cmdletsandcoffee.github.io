@@ -70,6 +70,6 @@ switch (platform) {
 }
 ---
 
-<a href={platform === "email" ? `mailto:${url}` : url} class="m-0 p-0 no-underline hover:text-theme-accent">
-  <Icon name={iconName} size={size} title={popup || platform} class:list={["mr-2 mt-1", className]} />
+<a href={platform === "email" ? `mailto:${url}` : url} class="hover:text-theme-accent m-0 p-0 no-underline">
+  <Icon name={iconName} size={size} title={popup || platform} class:list={["mt-1 mr-2", className]} />
 </a>

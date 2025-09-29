@@ -59,7 +59,7 @@ posts?.sort((a, b) => new Date(b.data.pubDatetime || 0).valueOf() - new Date(a.d
             class="group mb-2 flex flex-row items-center no-underline"
           >
             {post.data.cover && (
-              <div class="mb-2 mr-4 h-[4.5rem] w-[4.5rem] flex-shrink-0">
+              <div class="mr-4 mb-2 h-[4.5rem] w-[4.5rem] flex-shrink-0">
                 <Image
                   src={post.data.cover.src}
                   alt={post.data.cover.alt || post.data.title || "Post Image"}
@@ -76,29 +76,29 @@ posts?.sort((a, b) => new Date(b.data.pubDatetime || 0).valueOf() - new Date(a.d
             )}
             <h2 class="">{post.data.title}</h2>
           </a>
-          <div class="mb-3 mt-0 flex flex-wrap">
+          <div class="mt-0 mb-3 flex flex-wrap">
             {post.data.tags?.map((tag: string) => (
               <Tag tag={tag} size="sm" />
             ))}
           </div>
           <p class="mb-2 text-lg">
             {post.data.description}{" "}
-            <a href={`/${post.collection || collectionName}/${post.id}`} class="pl-2 text-theme-primary">
+            <a href={`/${post.collection || collectionName}/${post.id}`} class="text-theme-primary pl-2">
               Read more...
             </a>
           </p>
           {post.data.modDatetime && (
-            <p class="font-mono text-sm text-theme-primary">
+            <p class="text-theme-primary font-mono text-sm">
               updated: {new Date(post.data.modDatetime).toLocaleString()}
             </p>
           )}
-          <div class="mb-3 ml-1 inline-block border-l-4 border-theme-primary p-4">
+          <div class="border-theme-primary mb-3 ml-1 inline-block border-l-4 p-4">
             <Icon name="ri:quill-pen-line" size="16" class="mr-0.5 inline align-middle" />
             Posted by:
             <Author
               authorId={post.data.authorId}
               pubDateTime={new Date(post.data.pubDatetime)}
-              class="ml-0.5 mt-2 inline font-mono not-italic"
+              class="mt-2 ml-0.5 inline font-mono not-italic"
             />
           </div>
         </article>
