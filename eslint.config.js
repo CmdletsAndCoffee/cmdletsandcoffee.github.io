@@ -38,12 +38,7 @@ export default [
   },
   {
     // Define the configuration for script files.
-    files: [
-      "scripts/**/*.mjs",
-      "scripts/**/*.js",
-      "src/**/*.mjs",
-      "src/**/*.js",
-    ],
+    files: ["scripts/**/*.mjs", "scripts/**/*.js", "src/**/*.mjs", "src/**/*.js"],
     languageOptions: {
       globals: {
         ...globals.node,
