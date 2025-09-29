@@ -37,11 +37,10 @@ export default [
     },
   },
   {
-    // Define the configuration for API endpoint files.
-    files: ["src/pages/**/*.js", "src/pages/**/*.ts"],
+    // Define the configuration for script files.
+    files: ["scripts/**/*.mjs", "scripts/**/*.js", "src/**/*.mjs", "src/**/*.js"],
     languageOptions: {
       globals: {
-        ...globals.browser,
         ...globals.node,
       },
     },

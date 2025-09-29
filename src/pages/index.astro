@@ -1,9 +1,10 @@
 ---
 import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
-import PageHeader from "@components/Astro/PageHeader.astro";
+import SplashHeader from "@components/Astro/SplashHeader.astro";
 import { getPosts } from "@utils/getPosts";
 import ClickableCard from "@components/Astro/ClickableCard.astro";
+import backgroundImage from "@assets/Polygon-Luminary.svg";
 
 // Fetch and sort the first 3 blog posts
 const posts = (await getPosts())
@@ -12,7 +13,12 @@ const posts = (await getPosts())
 ---
 
 <Layout>
-  <PageHeader heading={SITE.heading} description={SITE.description} />
+  <SplashHeader
+    heading={SITE.heading}
+    description={SITE.description}
+    backgroundImage={backgroundImage}
+    backgroundOpacity={0.3}
+  />
 
   <section class="fade-in mb-16 mt-16 flex flex-col items-center justify-center">
     <a

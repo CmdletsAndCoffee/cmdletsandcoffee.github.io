@@ -84,6 +84,7 @@ export type Author = {
 
 export type Site = {
   title: string;
+  logo?: string;
   url: string;
   author: string;
   postsPerPage: number;
