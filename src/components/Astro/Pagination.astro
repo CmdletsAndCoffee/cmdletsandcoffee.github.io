@@ -55,10 +55,10 @@ const { next, prev } = url;
 ---
 
 <nav class:list={["flex items-center justify-start", className]}>
-  <Link href={prev || "#"} text="← Previous" class:list={["text-theme-primary p-2", { disabled: !prev }]} />
+  <Link href={prev || "#"} text="← Previous" class:list={["p-2 text-theme-primary", { disabled: !prev }]} />
   <span class="px-2">
     Page {currentPage} of {lastPage}
   </span>
 
-  <Link href={next || "#"} text="Next →" class:list={["text-theme-primary p-2", { disabled: !next }]} />
+  <Link href={next || "#"} text="Next →" class:list={["p-2 text-theme-primary", { disabled: !next }]} />
 </nav>

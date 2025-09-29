@@ -39,10 +39,10 @@ const { authorId, pubDateTime = null, class: className } = Astro.props;
 const displayDate = pubDateTime ? new Date(pubDateTime.getTime() + pubDateTime.getTimezoneOffset() * 60000) : null; // Adjust for local timezone
 ---
 
-<div class:list={["text-theme-primary -mt-0.5 ml-0 p-0 font-mono", className]}>
+<div class:list={["-mt-0.5 ml-0 p-0 font-mono text-theme-primary", className]}>
   <span>
     {AUTHORS.find((author) => author.id === authorId)?.name}
-    <div class="-mt-0.5 -mb-3 text-sm font-normal">
+    <div class="-mb-3 -mt-0.5 text-sm font-normal">
       {displayDate ? `- ${displayDate.toDateString()}  ` : ""}
     </div>
   </span>
@@ -50,7 +50,7 @@ const displayDate = pubDateTime ? new Date(pubDateTime.getTime() + pubDateTime.g
     <SocialsCloud
       socials={AUTHORS.find((author) => author.id === authorId)?.socials || []}
       size={18}
-      class:list={["mt-3 ml-0"]}
+      class:list={["ml-0 mt-3"]}
     />
   </div>
 </div>

@@ -17,7 +17,7 @@ The 'prose' section is used to style markdown content.
 
   html {
     @apply antialiased;
-    @apply bg-theme-primary bg-gradient-linear text-theme-primary mx-auto my-0 flex min-h-[100svh] w-full flex-col items-center font-sans;
+    @apply mx-auto my-0 flex min-h-[100svh] w-full flex-col items-center bg-theme-primary bg-gradient-linear font-sans text-theme-primary;
     @apply scroll-smooth;
   }
 
@@ -66,7 +66,7 @@ The 'prose' section is used to style markdown content.
   .h4,
   .h5,
   .h6 {
-    @apply font-serif leading-normal font-bold tracking-widest;
+    @apply font-serif font-bold leading-normal tracking-widest;
   }
 
   h5,
@@ -78,12 +78,12 @@ The 'prose' section is used to style markdown content.
 
   h1,
   .h1 {
-    @apply text-theme-accent text-[3.5rem] md:text-[4rem] lg:leading-normal lg:tracking-widest;
+    @apply text-[3.5rem] text-theme-accent md:text-[4rem] lg:leading-normal lg:tracking-widest;
   }
 
   h2,
   .h2 {
-    @apply text-theme-accent mb-1 text-5xl;
+    @apply mb-1 text-5xl text-theme-accent;
   }
 
   h3,
@@ -109,7 +109,7 @@ The 'prose' section is used to style markdown content.
   p,
   li,
   a {
-    @apply text-theme-primary py-1 font-normal;
+    @apply py-1 font-normal text-theme-primary;
   }
 
   p {
@@ -117,7 +117,7 @@ The 'prose' section is used to style markdown content.
   }
 
   a {
-    @apply decoration-theme-primary hover:bg-opacity-20 hover:text-theme-accent hover:decoration-theme-secondary focus:ring-theme-primary cursor-pointer underline decoration-2 underline-offset-2 focus:ring-2 focus:ring-offset-2 focus:outline-none;
+    @apply cursor-pointer underline decoration-theme-primary decoration-2 underline-offset-2 hover:bg-opacity-20 hover:text-theme-accent hover:decoration-theme-secondary focus:outline-none focus:ring-2 focus:ring-theme-primary focus:ring-offset-2;
   }
 
   a.active {
@@ -137,7 +137,7 @@ The 'prose' section is used to style markdown content.
   }
 
   pre:has(code) {
-    @apply border-theme-secondary mt-3 inline-block w-full overflow-x-auto border p-4 font-mono text-sm transition-colors duration-500 ease-linear;
+    @apply mt-3 inline-block w-full overflow-x-auto border border-theme-secondary p-4 font-mono text-sm transition-colors duration-500 ease-linear;
   }
 
   code,
@@ -151,7 +151,7 @@ The 'prose' section is used to style markdown content.
   }
 
   blockquote {
-    @apply border-theme-primary text-theme-primary border-l-4 pl-4 italic;
+    @apply border-l-4 border-theme-primary pl-4 italic text-theme-primary;
   }
 
   ::selection {
@@ -181,7 +181,7 @@ The 'prose' section is used to style markdown content.
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-theme-secondary bg-opacity-50 cursor-pointer;
+    @apply cursor-pointer bg-theme-secondary bg-opacity-50;
   }
 
   /* code block scroll */
@@ -194,7 +194,7 @@ The 'prose' section is used to style markdown content.
 
 @layer components {
   .prose {
-    @apply text-theme-primary text-lg leading-relaxed md:m-auto;
+    @apply text-lg leading-relaxed text-theme-primary md:m-auto;
   }
 
   .prose h1,
@@ -214,48 +214,48 @@ The 'prose' section is used to style markdown content.
 
   .prose h1,
   .prose .h1 {
-    @apply text-theme-secondary max-w-7xl text-4xl leading-relaxed tracking-widest md:text-5xl;
+    @apply max-w-7xl text-4xl leading-relaxed tracking-widest text-theme-secondary md:text-5xl;
   }
 
   .prose h2,
   .prose .h2 {
-    @apply text-theme-accent mt-8 text-4xl leading-normal tracking-widest;
+    @apply mt-8 text-4xl leading-normal tracking-widest text-theme-accent;
   }
 
   .prose h3,
   .prose .h3 {
-    @apply text-theme-primary mt-6 text-3xl tracking-widest;
+    @apply mt-6 text-3xl tracking-widest text-theme-primary;
   }
 
   .prose h4,
   .prose .h4 {
-    @apply text-theme-primary mt-4 text-xl tracking-widest;
+    @apply mt-4 text-xl tracking-widest text-theme-primary;
   }
 
   .prose h5,
   .prose .h5 {
-    @apply text-theme-primary mb-1 font-mono text-lg uppercase;
+    @apply mb-1 font-mono text-lg uppercase text-theme-primary;
   }
 
   .prose h6,
   .prose .h6 {
-    @apply text-theme-primary mb-1 font-mono text-sm uppercase;
+    @apply mb-1 font-mono text-sm uppercase text-theme-primary;
   }
 
   .prose p {
-    @apply text-theme-primary p-2 text-lg lg:p-2.5;
+    @apply p-2 text-lg text-theme-primary lg:p-2.5;
   }
 
   .prose a {
-    @apply text-theme-primary decoration-theme-primary hover:bg-opacity-20 hover:text-theme-accent hover:decoration-theme-secondary cursor-pointer decoration-2 underline-offset-2;
+    @apply cursor-pointer text-theme-primary decoration-theme-primary decoration-2 underline-offset-2 hover:bg-opacity-20 hover:text-theme-accent hover:decoration-theme-secondary;
   }
 
   .prose blockquote {
-    @apply border-theme-secondary text-theme-primary border-l-4 pl-4 italic;
+    @apply border-l-4 border-theme-secondary pl-4 italic text-theme-primary;
   }
 
   .prose ul {
-    @apply marker:text-theme-primary list-inside;
+    @apply list-inside marker:text-theme-primary;
   }
 
   .prose ol {
@@ -263,11 +263,11 @@ The 'prose' section is used to style markdown content.
   }
 
   .prose li {
-    @apply text-theme-primary py-1 text-lg leading-relaxed;
+    @apply py-1 text-lg leading-relaxed text-theme-primary;
   }
 
   .prose pre {
-    @apply border-theme-secondary mt-3 overflow-x-auto border p-4 font-mono text-sm transition-colors duration-[1500ms] ease-linear;
+    @apply mt-3 overflow-x-auto border border-theme-secondary p-4 font-mono text-sm transition-colors duration-[1500ms] ease-linear;
     display: inline-block;
     width: 100%;
   }
@@ -278,11 +278,11 @@ The 'prose' section is used to style markdown content.
   }
 
   .prose code:not(pre code) {
-    @apply bg-theme-secondary text-theme-secondary inline-block px-1;
+    @apply inline-block bg-theme-secondary px-1 text-theme-secondary;
   }
 
   .prose strong:not(h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong) {
-    @apply text-theme-primary relative font-semibold tracking-wider;
+    @apply relative font-semibold tracking-wider text-theme-primary;
     /* Changed to font-semibold and font-sans for readability */
   }
 
@@ -299,7 +299,7 @@ The 'prose' section is used to style markdown content.
   }
 
   .is-title-alt {
-    @apply bg-theme-secondary text-theme-secondary font-serif text-5xl font-bold md:text-6xl lg:leading-normal lg:tracking-widest;
+    @apply bg-theme-secondary font-serif text-5xl font-bold text-theme-secondary md:text-6xl lg:leading-normal lg:tracking-widest;
   }
 
   .focused {

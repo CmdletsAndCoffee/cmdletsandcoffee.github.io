@@ -68,14 +68,14 @@ const options = {
 };
 ---
 
-<div class:list={["shadow-theme-primary h-auto w-full border-2 p-4 md:max-w-[450px]", options, className]}>
+<div class:list={["h-auto w-full border-2 p-4 shadow-theme-primary md:max-w-[450px]", options, className]}>
   <p class:list={["h3", "uppercase", "font-bold", "mb-2", { "text-theme-primary": !alt, "text-theme-secondary": alt }]}>
     <span class="flex items-center gap-4">
       {
         iconName && alignIcon === "left" && (
           <>
             <Icon name={iconName} width={42} height={42} />
-            <span class="sm:border-theme-primary sm:border-b md:flex-1" />
+            <span class="sm:border-b sm:border-theme-primary md:flex-1" />
           </>
         )
       }
@@ -83,14 +83,14 @@ const options = {
       {
         iconName && alignIcon === "right" && (
           <>
-            <span class="sm:border-theme-primary sm:border-b md:flex-1" />
+            <span class="sm:border-b sm:border-theme-primary md:flex-1" />
             <Icon name={iconName} width={42} height={42} />
           </>
         )
       }
     </span>
   </p>
-  <hr class:list={["mb-2 border-1", { "border-theme-primary": !alt }, { "border-theme-secondary": alt }]} />
+  <hr class:list={["border-1 mb-2", { "border-theme-primary": !alt }, { "border-theme-secondary": alt }]} />
   <p class:list={["text-lg", { "text-theme-primary": !alt, "text-theme-secondary": alt }]}>
     {description}
   </p>

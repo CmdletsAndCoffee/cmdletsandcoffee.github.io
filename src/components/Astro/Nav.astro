@@ -48,7 +48,7 @@ const pathname = new URL(Astro.request.url).pathname;
   aria-label="Main navigation"
   class:list={["z-10 flex flex-nowrap items-baseline px-2 sm:px-4", className]}
 >
-  <ul class="mb-2 inline-flex flex-wrap sm:mr-6 sm:mb-0">
+  <ul class="mb-2 inline-flex flex-wrap sm:mb-0 sm:mr-6">
     {
       links.map((obj) => (
         <li class="mb-2 py-0 pr-4 first:pl-1 sm:mb-0 md:pr-5">
