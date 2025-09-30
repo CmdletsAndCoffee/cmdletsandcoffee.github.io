@@ -105,6 +105,10 @@ export const NAVIGATION: NavEntry[] = [
     href: "/tags",
     text: "Tags",
   },
+  {
+    href: "/categories",
+    text: "Categories",
+  },
 ];
 
 export const BLOG: Blog = {

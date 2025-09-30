@@ -1,0 +1,32 @@
+---
+import { SITE, COLLECTION_NAMES_LIST } from "src/alkaline.config";
+import type { PaginateFunction } from "astro";
+import { getPosts } from "@utils/getPosts";
+import Posts from "@layouts/Posts.astro";
+
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+  const posts = await getPosts(COLLECTION_NAMES_LIST);
+
+  const uniqueCategories = [...new Set(posts.flatMap((post) => post.data.category || []))];
+
+  return uniqueCategories.flatMap((category) => {
+    const filteredPosts = posts.filter((post) => post.data.category === category);
+    return paginate(filteredPosts, {
+      params: { category },
+      pageSize: SITE.postsPerPage,
+      props: { category },
+    });
+  });
+}
+
+const { page, category } = Astro.props;
+const posts = page.data;
+---
+
+<Posts
+  posts={posts}
+  page={page}
+  subtitle={`Showing all posts for ${category}`}
+  collectionName={category}
+  title={category?.toUpperCase()}
+/>

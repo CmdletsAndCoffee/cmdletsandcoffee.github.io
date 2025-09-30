@@ -1,0 +1,14 @@
+---
+import Category from "@components/Astro/utils/Category.astro";
+
+interface Props {
+  category: string;
+  class?: string | undefined;
+}
+
+const { class: className, category } = Astro.props;
+---
+
+<div class:list={["flex, flex-wrap, mx-0, px-0", className]}>
+  <Category category={category} size="xs" />
+</div>

@@ -1,0 +1,36 @@
+---
+import { COLLECTION_NAMES_LIST } from "src/alkaline.config";
+import { getPosts } from "@utils/getPosts";
+import Layout from "@layouts/Layout.astro";
+import CategoryCloud from "@components/Astro/CategoryCloud.astro";
+import Heading from "@components/Astro/Heading.astro";
+// Get all entries from all collections
+const allEntries = await getPosts(COLLECTION_NAMES_LIST);
+
+// Flatten the array and extract categories
+const allCategories = allEntries.flatMap((entry) => entry.data.category || []);
+
+// Count occurrences of each category
+const categoryCounts = allCategories.reduce(
+  (acc, category) => {
+    acc[category] = (acc[category] || 0) + 1;
+    return acc;
+  },
+  {} as Record<string, number>
+);
+
+// Sort categories and create objects with explicit typing
+const sortedCategories = Object.entries(categoryCounts)
+  .sort(([, a], [, b]): number => (b as number) - (a as number))
+  .map(([category, count]): { name: string; count: number } => ({
+    name: category,
+    count: count as number,
+  }));
+---
+
+<Layout title="Categories">
+  <Heading text="Get Entries by Category" />
+  <section>
+    <CategoryCloud categories={sortedCategories} />
+  </section>
+</Layout>

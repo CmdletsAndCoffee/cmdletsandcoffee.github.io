@@ -11,6 +11,7 @@ import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Tags from "@components/Astro/Tags.astro";
 import Author from "@components/Astro/Author.astro";
+import Categories from "@components/Astro/Categories.astro";
 
 interface Props {
   collectionName: (typeof COLLECTION_NAMES_LIST)[number];
@@ -56,10 +57,21 @@ const { Content } = await render(entry);
 
       <Author authorId={entry.data.authorId} pubDateTime={entry.data.pubDatetime} />
       {
-        entry.data.tags && (
-          <span class="-mt-4 mb-14 flex items-baseline">
-            <Tags tags={entry.data.tags} class="mt-2" />
-          </span>
+        (entry.data.category || entry.data.tags) && (
+          <div class="-mt-4 mb-14 flex flex-col">
+            {entry.data.category && (
+              <span class="flex items-baseline">
+                <span class="font-bold">Category:</span>
+                <Categories category={entry.data.category} class="ml-2 mt-2" />
+              </span>
+            )}
+            {entry.data.tags && (
+              <span class="flex items-baseline">
+                <span class="font-bold">Tags:</span>
+                <Tags tags={entry.data.tags} class="ml-2 mt-2" />
+              </span>
+            )}
+          </div>
         )
       }
 

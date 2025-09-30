@@ -40,10 +40,9 @@ const options = { "rounded-theme": true };
 posts?.sort((a, b) => new Date(b.data.pubDatetime || 0).valueOf() - new Date(a.data.pubDatetime || 0).valueOf());
 ---
 
-<Layout title={BLOG.title} description={BLOG.description} class={className}>
-  {BLOG.subtitle && <Heading text={BLOG.subtitle} showHeadingBackground />}
-  {
-    subtitle?.toLowerCase() !== "blog examples" && (
+<Layout title={BLOG.subtitle} description={BLOG.description} class={className}>
+    {subtitle?.toLowerCase() !== "the coffeehouse" && (
+      <Heading text={subtitle} />
       <span class="block text-center">
         <a href="/blog"> Back to all blog entires</a>
       </span>

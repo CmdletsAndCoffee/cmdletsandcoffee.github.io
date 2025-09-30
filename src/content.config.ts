@@ -27,6 +27,7 @@ const postCollectionSchema = {
     .optional(),
   isFeatured: z.boolean().optional(),
   isDraft: z.boolean().optional(),
+  category: z.string().optional(),
   tags: z.array(z.string()).optional(),
   image: z
     .object({

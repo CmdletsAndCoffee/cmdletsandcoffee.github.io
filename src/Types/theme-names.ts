@@ -13,5 +13,10 @@
   | "theme-refresher"
   | "theme-slime"
   | "theme-syntax"
-  | "theme-vanilla";
+  | "theme-vanilla"
+  | "theme-ocean-breeze"
+  | "theme-sunset-groove"
+  | "theme-forest-whisper"
+  | "theme-cyberpunk-neon"
+  | "theme-strawberry-cream";
     

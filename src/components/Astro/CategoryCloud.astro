@@ -1,0 +1,18 @@
+---
+import Category from "@components/Astro/utils/Category.astro";
+
+interface Props {
+  categories: {
+    name: string;
+    count?: number | string | undefined;
+  }[];
+  class?: string | undefined;
+}
+
+const { categories = [], class: className } = Astro.props;
+---
+
+<div class:list={["mb-0.5 inline-flex w-full flex-wrap-reverse items-center justify-center px-0", className]}>
+  {categories.map((category) => <Category category={category.name} count={category.count} size="lg" />)}
+</div>
+<hr class="my-5 text-theme-accent" />
