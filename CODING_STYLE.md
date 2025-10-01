@@ -51,6 +51,7 @@ This project uses **Prettier** for code formatting and **ESLint** for identifyin
 - **Braces:** Use **One True Brace Style (OTBS)**.
 
 To automatically format your code and check for issues, please use the following commands:
+
 - `pnpm run format`: Formats all code with Prettier.
 - `pnpm run lint`: Runs all linting checks.
 - `pnpm run fix`: Formats code and automatically fixes linting issues.

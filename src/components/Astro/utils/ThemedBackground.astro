@@ -3,7 +3,7 @@
 const { class: className, ...rest } = Astro.props;
 ---
 
-<div class:list={["absolute m-0 p-0 left-0 top-0 -z-10 h-full w-full", className]} {...rest}>
+<div class:list={["absolute left-0 top-0 -z-10 m-0 h-full w-full p-0", className]} {...rest}>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     version="1.1"

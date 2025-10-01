@@ -11,12 +11,9 @@ const posts = (await getPosts())
   .sort((a, b) => b.data.pubDatetime.valueOf() - a.data.pubDatetime.valueOf())
   .slice(0, 3);
 ---
+
 <Layout>
-  <SplashHeader
-    heading={SITE.heading}
-    description={SITE.description}
-    backgroundOpacity={0.3}
-  >
+  <SplashHeader heading={SITE.heading} description={SITE.description} backgroundOpacity={0.3}>
     <ThemedBackground />
   </SplashHeader>
 
