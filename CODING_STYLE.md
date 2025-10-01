@@ -20,11 +20,14 @@ This document outlines the coding style and best practices for the Cmdlets and C
 
 - **Styling:** Prefer using CSS or Tailwind classes within a `<style>` block in `.astro` components. Use separate `.css` files for global styles only.
 
-- **JavaScript/TypeScript:**
+- **JavaScript/TypeScript Naming:**
+  - Use `camelCase` for all variables and functions (e.g., `userName`, `calculateTotal`).
+  - Use `PascalCase` for all classes (e.g., `AuthService`).
+  - Prefix boolean variables with `is`, `has`, or `can` (e.g., `isLoggedIn`, `hasPermission`).
+
+- **JavaScript/TypeScript Best Practices:**
   - Use `let` or `const` instead of `var`.
-
   - Use arrow functions (`=>`) where appropriate for a more concise syntax.
-
   - Use `async/await` for handling asynchronous operations instead of `.then()`.
 
 ## PowerShell (Backend/Scripts)
@@ -39,28 +42,18 @@ This document outlines the coding style and best practices for the Cmdlets and C
 
 - **Pipeline:** Prefer using the PowerShell pipeline (`|`) for data flow instead of temporary variables where possible.
 
-## Naming Conventions (General)
+## Formatting and Linting
 
-- **All variables, functions, and constants:** Use `PascalCase` for all variables, functions, and constants (e.g., `UserName`, `CalculateTotal`, `MaxAttempts`).
+This project uses **Prettier** for code formatting and **ESLint** for identifying and reporting on patterns in JavaScript and TypeScript.
 
-- **Boolean variables:** Prefix boolean variables with `Is`, `Has`, or `Can` to make their purpose clear (e.g., `IsLoggedIn`, `HasPermission`).
+- **Indentation:** Use **2 spaces** for indentation.
+- **Line length:** Keep lines of code under **120 characters**.
+- **Braces:** Use **One True Brace Style (OTBS)**.
 
-- **Classes and components:** Use `PascalCase` for class and component names (e.g., `UserCard`, `AuthService`).
-
-## Formatting and Spacing
-
-- **Indentation:** Use **2 spaces** for indentation. Avoid using tabs.
-
-- **Line length:** Keep lines of code under **120 characters** to improve readability on most screens.
-
-- **Braces:** Use **One True Brace Style (OTBS)**, where the opening brace is on the same line as the statement. Use braces for all control structures (e.g., `if`, `for`, `while`), even for single-line statements.
-
-- **Whitespace:**
-  - Use spaces around operators (e.g., `x = 5 + y`).
-
-  - Use a space after commas in lists and function arguments (e.g., `MyFunction(Arg1, Arg2)`).
-
-  - Do not use spaces inside parentheses (e.g., `MyFunction(Arg)`).
+To automatically format your code and check for issues, please use the following commands:
+- `pnpm run format`: Formats all code with Prettier.
+- `pnpm run lint`: Runs all linting checks.
+- `pnpm run fix`: Formats code and automatically fixes linting issues.
 
 ## Comments and Documentation
 
