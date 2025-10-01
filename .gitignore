@@ -14,16 +14,21 @@ yarn-error.log*
 pnpm-debug.log*
 
 # environment variables
-.env
-.env.production
+*.env
+!*.env.example
 
 # macOS-specific files
 .DS_Store
 
-# jetbrains setting folder
+# Windows-specific files
+Thumbs.db
+
+# IDE-specific files
 .idea/
+.vscode/
 
+# Temporary files
 .private/
-
 *_EDITMSG
 *_TEMPLATE.md
+PR_MESSAGE.md
