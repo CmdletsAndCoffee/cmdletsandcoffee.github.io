@@ -50,23 +50,23 @@ const options = {
 
 <div
   class:list={[
-    "relative my-0 flex border-b-8 border-t-8 py-0",
+    "relative m-0 p-0 flex border-b-8 border-t-8 py-0",
     {
       "border-none": !showTitleBackground,
-      "border-theme-secondary": showTitleBackground,
+      "border-theme-primary": showTitleBackground,
     },
     options,
     // "rounded-t-none",
   ]}
 >
-  {showTitleBackground && <PatternBackground pattern={"circuit"} />}
-  <div class="my-0 flex w-full flex-row items-center justify-center">
+  {showTitleBackground && <PatternBackground pattern={"triangles"} animate={true} patternOpacity={.3} />}
+  <div class="m-0 p-0 flex w-full flex-row items-center justify-center">
     <h1
       class:list={[
         "mx-0 w-full py-0",
         {
-          "is-title-alt py-5 text-center leading-none": showTitleBackground,
-          "is-title p-0": !showTitleBackground,
+          "is-title py-5 text-center leading-none": showTitleBackground,
+          "is-title p-0": showTitleBackground,
         },
         className,
       ]}
