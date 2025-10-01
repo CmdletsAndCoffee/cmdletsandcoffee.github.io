@@ -25,51 +25,26 @@
  * - Accessible (aria-hidden)
  */
 
-// common pattern presets
-const PATTERN_PRESETS = {
-  dots: "M2 2h2v2H2z",
-  diagonal: "M0 0l5 5l-5 5l5-5z",
-  grid: "M10 10h10v10H10z",
-  waves: "M0 10c2.8 0 2.8 5 5.6 5s2.8-5 5.6-5 2.8 5 5.6 5 2.8-5 5.6-5",
-  circuit: "M5 0v10M0 5h10M15 0v10M10 5h10",
-} as const;
-
 interface Props {
-  // SVG path data for the pattern or preset name //
-  pattern: string | keyof typeof PATTERN_PRESETS;
   // Opacity value for the pattern (0-1) //
   patternOpacity?: number;
   // Pattern size in pixels //
   patternSize?: number;
-  // Pattern stroke width //
-  strokeWidth?: number;
   // Enable/disable pattern animation //
   animate?: boolean;
   // Optional CSS classes //
   class?: string | undefined;
 }
 
-const {
-  pattern,
-  patternOpacity = 0.1,
-  patternSize = 30,
-  strokeWidth = 1,
-  animate = true,
-  class: className = "",
-} = Astro.props;
-
-// Get pattern data from preset or use custom pattern
-const patternData = PATTERN_PRESETS[pattern as keyof typeof PATTERN_PRESETS] || pattern;
-
-// Generate a unique ID for the pattern
-const patternId = `pattern-${crypto.randomUUID()}`;
+const { patternOpacity = 0.1, patternSize = 30, animate = true, class: className = "" } = Astro.props;
 ---
 
 <div
   class:list={[`absolute inset-0 -z-10 m-0 h-full w-full p-0`, className, { "fade-in": animate }]}
   aria-hidden="true"
 >
-  <svg
+  <!--
+    <svg
     xmlns="http://www.w3.org/2000/svg"
     class:list={["absolute inset-0 hidden h-full w-full lg:block", { spinOnAxis: animate }]}
     style={`mask-image: radial-gradient(circle at 75% 5%, hsla(0,0%,0%,${patternOpacity}) 0%, transparent 45%);`}
@@ -82,15 +57,36 @@ const patternId = `pattern-${crypto.randomUUID()}`;
         height={patternSize}
         patternUnits="userSpaceOnUse"
         patternTransform="translate(-1 -1)"
-      >
+        >
         <path
-          d={patternData || PATTERN_PRESETS.circuit}
-          stroke="currentColor"
-          stroke-width={strokeWidth}
-          fill="none"
-          vector-effect="non-scaling-stroke"></path>
-      </pattern>
-    </defs>
-    <rect width="100%" height="100%" fill={`url(#${patternId})`}></rect>
-  </svg>
+        d={patternData || PATTERN_PRESETS.triangles}
+        stroke="currentColor"
+        stroke-width={strokeWidth}
+        fill="none"
+        vector-effect="non-scaling-stroke"></path>
+    </pattern>
+</defs>
+<rect width="100%" height="100%" fill={`url(#${patternId})`}></rect>
+</svg>
+-->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class:list={["absolute inset-0 hidden h-full w-full lg:block", { spinOnAxis: animate }]}
+    style={`mask-image: radial-gradient(circle at 75% 5%, hsla(0,0%,0%,${patternOpacity}) 0%, transparent 45%);`}
+    aria-hidden="true"
+    ><defs
+      ><pattern id="a" width={patternSize} height={patternSize} patternUnits="userSpaceOnUse"
+        ><rect width="100%" height="100%" fill="#2b2b31"></rect><path
+          fill="bg-theme-primary"
+          d="M36.8-18.62 47.57 0 58.4-18.6zM47.57 0 36.7 18.62h21.6zM0 2.63l10.75 18.62L21.59 2.64zm10.75 18.62L-.1 39.87h21.6zM73.61 2.63l10.75 18.62L95.21 2.64zm10.75 18.62L73.52 39.87h21.6zm-47.55 2.63L47.56 42.5 58.4 23.9zM47.56 42.5 36.7 61.12h21.6zM0 45.13l10.75 18.62 10.84-18.61zm10.75 18.62L-.1 82.37h21.6zm62.86-18.62 10.75 18.62 10.85-18.61zm10.75 18.62L73.52 82.37h21.6zm-47.55 2.63L47.56 85 58.4 66.4zM47.56 85 36.7 103.62h21.6z"
+        ></path><path
+          fill="bg-theme-accent"
+          d="M58.4-18.61 47.56 0h21.59L58.4-18.6zM47.56 0h-21.6l10.75 18.62zM21.59 2.64 10.75 21.25h21.6L21.58 2.65zM10.75 21.25h-21.6L-.1 39.87zm52.02 0 10.75 18.62 10.84-18.62h-21.6zm-4.37 2.64L47.56 42.5h21.59L58.4 23.9zM47.56 42.5h-21.6l10.75 18.62zm-25.97 2.64L10.75 63.75h21.6l-10.77-18.6zM10.75 63.75h-21.6L-.1 82.37zm52.02 0 10.75 18.62 10.84-18.62h-21.6zm-4.37 2.64L47.56 85h21.59L58.4 66.4zM47.56 85h-21.6l10.75 18.62z"
+        ></path><path
+          fill="bg-theme-secondary"
+          d="m58.3 103.62 10.85-18.61h-21.6zM25.97 85h21.6L36.8 66.38zm32.35-66.38L69.15.01h-21.6zM25.96 0h21.6L36.8-18.62zm36.8 63.75h21.6L73.61 45.13zM21.5 39.87l10.84-18.61H10.75zm-32.34-18.62h21.59L0 2.63zm95.2 0L73.61 2.63 62.77 21.25zm-73.61 42.5L21.5 82.37l10.84-18.61zM0 45.13l-10.85 18.62h21.6zm10.33 20.45-.37-.56-.15.26zM46.1 86.23l.52.3.15-.26zm23.05-43.72h-21.6l10.76 18.61zm-21.6 0L36.82 23.87 25.96 42.5z"
+        ></path></pattern
+      ></defs
+    ><rect width="1000%" height="1000%" fill="url(#a)"></rect></svg
+  >
 </div>

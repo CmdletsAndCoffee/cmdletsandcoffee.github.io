@@ -41,11 +41,14 @@ posts?.sort((a, b) => new Date(b.data.pubDatetime || 0).valueOf() - new Date(a.d
 ---
 
 <Layout title={BLOG.subtitle} description={BLOG.description} class={className}>
-    {subtitle?.toLowerCase() !== "the coffeehouse" && (
-      <Heading text={subtitle} />
-      <span class="block text-center">
-        <a href="/blog"> Back to all blog entires</a>
-      </span>
+  {
+    subtitle?.toLowerCase() !== "the coffeehouse" && (
+      <>
+        <Heading text={subtitle ?? ""} />
+        <span class="block text-center">
+          <a href="/blog"> Back to all blog entires</a>
+        </span>
+      </>
     )
   }
   <section class="mt-0 md:mx-auto md:max-w-3xl">

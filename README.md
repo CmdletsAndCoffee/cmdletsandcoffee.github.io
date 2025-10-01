@@ -4,77 +4,68 @@
 
 [![Deploy Astro site to Pages](https://github.com/CmdletsAndCoffee/cmdletsandcoffee.github.io/actions/workflows/astro.yml/badge.svg)](https://github.com/CmdletsAndCoffee/cmdletsandcoffee.github.io/actions/workflows/astro.yml)
 
-Welcome to the official source code for the **Cmdlets and Coffee** podcast and blog\! This repository is where we brew all of our website content and share the full recipe for every script and tutorial from the show.
+Welcome to the official source code for the **Cmdlets and Coffee** podcast and blog! This repository is where we brew all of our website content and share the full recipe for every script and tutorial from the show.
 
 ---
 
-## What's Inside?
+## 🚀 Project Structure
 
-This site is built with **Astro**, a fantastic tool for building content-focused websites. Here you'll find all the ingredients you need:
+This site is built with **Astro**, a fantastic tool for building content-focused websites. Here's a look at the project structure:
 
-- **Website Source:** The complete codebase for the `cmdletsandcoffee.gihhub.io` website.
-- **Blog Posts:** The source Markdown files for every article and show note.
-- **Code Examples:** All the scripts and code snippets discussed on the podcast, ready for you to explore and use.
-
----
-
-## Get Started
-
-Ready to grab a cup and start scripting?
-
-- **Listen to the Podcast:** Find the latest episodes and subscribe.
-- **Visit the Blog:** Read the show notes, transcripts, and bonus tutorials.
-- **Join the Community:** Ask questions and suggest topics in our official [Discussions repository](https://github.com/orgs/CmdletsAndCoffee/discussions).
+- **`src/`**: Contains the main source code for the website.
+  - **`components/`**: Reusable Astro components.
+  - **`data/`**: Data files, including blog posts in `data/blog/`.
+  - **`layouts/`**: Astro layouts for different page types.
+  - **`pages/`**: Astro pages, which define the routes of the website.
+- **`public/`**: Static assets like images and fonts.
+- **`astro.config.mjs`**: The main configuration file for Astro.
+- **`tailwind.config.mjs`**: The configuration file for Tailwind CSS.
 
 ---
 
-## Brewing Locally
+## 🛠️ Commands
 
-Want to get the site running on your own machine? It's as easy as pouring yourself a fresh cup.
+All commands are run from the root of the project, from a terminal:
 
-### Prerequisites
+| Command            | Action                                       |
+| :----------------- | :------------------------------------------- |
+| `pnpm install`     | Installs dependencies                        |
+| `pnpm run dev`     | Starts local dev server at `localhost:4321`  |
+| `pnpm run build`   | Build your production site to `./dist/`      |
+| `pnpm run preview` | Preview your build locally, before deploying |
+| `pnpm run check`   | Run Astro's diagnostic checks                |
 
-Make sure you have **Node.js** and a package manager like **pnpm** installed. If you prefer npm or yarn, you can use them instead.
+---
 
-### Setup
+## 🤝 Contributing
 
-1. **Clone the repository:**
+We welcome contributions to **Cmdlets and Coffee**! If you'd like to contribute, please follow these steps:
 
-   ```sh
-   git clone https://github.com/CmdletsAndCoffee/cmdletsandcoffee.github.io.git
-   cd cmdletsandcoffee.github.io
-   ```
+1. **Fork the repository.**
+2. **Create a new branch** for your feature or bug fix.
+3. **Make your changes.**
+4. **Submit a pull request** with a clear description of your changes.
 
-2. **Install dependencies:**
+Before contributing, please read our [**Coding Style Guide**](CODING_STYLE.md) to ensure your code is consistent with the project's standards.
 
-   ```sh
-   pnpm install
-   ```
+### Adding a Blog Post
 
-### Development & Testing
+1.  **Create a new file** in the `src/data/blog/` directory. The filename should be a slugified version of your title (e.g., `my-awesome-post.mdx`).
+2.  **Add the frontmatter** to the top of your post. It should include the following fields:
+    - `cover`: An object with `src` (path to the cover image) and `alt` text.
+    - `title`: The title of your post.
+    - `subtitle`: A brief subtitle.
+    - `description`: A short description for SEO purposes.
+    - `category`: The primary category of the post.
+    - `pubDatetime`: The publication date in `YYYY-MM-DD` format.
+    - `tags`: An array of relevant tags.
+    - `authorId`: The ID of the author (from `src/data/authors.ts`).
+    - `isDraft`: Set to `true` if the post is not ready to be published.
+3.  **Write your content** in Markdown or MDX format.
+4.  **Add any images** to the `src/data/blog/images/` directory and reference them in your post.
 
-Once your dependencies are installed, you're ready to start brewing\!
+---
 
-1. **Start the development server:**
+## 📜 License
 
-   ```sh
-   pnpm run dev
-   ```
-
-   This command starts a local server with live reloading, so your changes will appear instantly in your browser at `http://localhost:4321`.
-
-2. **Build for production:**
-
-   ```sh
-   pnpm run build
-   ```
-
-   This will compile all your Astro files into a set of static assets ready for deployment. The finished files will be located in the `dist/` directory.
-
-3. **Run a production preview:**
-
-   ```bash
-   pnpm run preview
-   ```
-
-   If you want to see exactly what the production site will look like before deploying, this command will run a local server for the built files.
+This project is licensed under the **MIT License**. See the [LICENSE.md](LICENSE.md) file for details.
