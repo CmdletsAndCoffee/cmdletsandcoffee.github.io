@@ -70,8 +70,8 @@ importers:
         version: 5.9.2
     devDependencies:
       '@eslint/js':
-        specifier: ^9.36.0
-        version: 9.36.0
+        specifier: ^9.38.0
+        version: 9.38.0
       editorconfig-checker:
         specifier: ^6.1.0
         version: 6.1.0
@@ -399,6 +399,10 @@ packages:
 
   '@eslint/js@9.36.0':
     resolution: {integrity: sha512-uhCbYtYynH30iZErszX78U+nR3pJU3RHGQ57NXy5QupD4SBVwDeU8TNBy+MjMngc1UyIW9noKqsRqfjQTBU2dw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@9.38.0':
+    resolution: {integrity: sha512-UZ1VpFvXf9J06YG9xQBdnzU+kthors6KjhMAl6f4gH4usHyh31rUf2DLGInT8RFYIReYXNSydgPY0V2LuWgl7A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.6':
@@ -2653,6 +2657,7 @@ packages:
   sitemap@8.0.0:
     resolution: {integrity: sha512-+AbdxhM9kJsHtruUF39bwS/B0Fytw6Fr1o4ZAIAEqA6cke2xcoO2GleBw9Zw7nRzILVEgz7zBM5GiTJjie1G9A==}
     engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    deprecated: 'SECURITY: Multiple vulnerabilities fixed in 8.0.1 (XML injection, path traversal, command injection, protocol injection). Upgrade immediately: npm install sitemap@8.0.1'
     hasBin: true
 
   slice-ansi@7.1.2:
@@ -3556,6 +3561,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@9.36.0': {}
+
+  '@eslint/js@9.38.0': {}
 
   '@eslint/object-schema@2.1.6': {}
 
